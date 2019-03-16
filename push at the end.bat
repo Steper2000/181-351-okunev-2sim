@@ -9,5 +9,5 @@ git add *.ui
 git add *.qrc
 git add *.txt
 git commit -sm "%DATE% %TIME%" 
-git push s2 master
+git push s2 mas
 pause
