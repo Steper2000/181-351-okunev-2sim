@@ -18,7 +18,7 @@ struct datas {
 bool checkOtr(std::string otr);
 //bool checkDate(std::string date);//тип данных Date
 //bool checkNal(std::string nal);
-//bool checkSum(std::string sum);
+bool checkSum(std::string sum);
 
 class DataBase {
 

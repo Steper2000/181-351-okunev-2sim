@@ -152,3 +152,8 @@ bool checkOtr(std::string otr)
 	ind.close();
 	return false;
 }
+
+bool checkSum(std::string sum)
+{
+	return false;
+}
