@@ -1,17 +1,20 @@
 #include "classdb.h"
 #include <fstream>
 #include <string>
+#include <cctype>   // для функции isdigit
+//#include <cstdlib>  // для функции atoi
 bool DataBase::add_data(datas tempData)//чётко
 {
 	//download(sdb);
-	if (checkOtr(tempData.otr)) 
+	if (checkPred(tempData.pred) && checkOtr(tempData.otr) && checkDate(tempData.date) &&checkSum(tempData.sum)) 
 	{
 		db.push_back(tempData);
 		//transformStr2BD(sdb);
 		//sdb +="\n"+ tempData.pred+"\t" + tempData.otr+"\t"  + tempData.date+ "\t"  + tempData.nal+"\t" + tempData.sum;
 		return true;
 	}
-	else return false;
+	else 
+		return false;
 }
 
 bool DataBase::download(std::string & res) //работает чётко
@@ -129,7 +132,17 @@ bool DataBase::write2file()//блестяще
 	return true;
 }
 
-bool checkOtr(std::string otr)
+bool checkPred(std::string pred)
+{
+	for (int i = 0; i < pred.size(); i++)
+	{
+		if (isdigit(pred[i]))
+			return false;
+	}
+	return true;
+}
+
+bool checkOtr(std::string otr)//чётенько again
 {
 	//FILE *ind; //("industry.txt");
 	//ind= fopen("industry.txt", "r");
@@ -153,7 +166,36 @@ bool checkOtr(std::string otr)
 	return false;
 }
 
-bool checkSum(std::string sum)
+bool checkDate(std::string date)
 {
-	return false;
+	if (date == "DATE")
+return true;
+	if (!isdigit(date[0]))
+		return false;
+	if (isdigit(date[1]))
+	{
+		if (isdigit(date[3]) && isdigit(date[4]) && (date[5] == '.') && isdigit(date[6]) && isdigit(date[7]) && isdigit(date[8]) && isdigit(date[9]))
+			return true;
+	}
+	else
+	{
+		if (date[1] == '.')
+		{
+			if (isdigit(date[2]) && isdigit(date[3]) && (date[4] == '.') && isdigit(date[5]) && isdigit(date[6]) && isdigit(date[7]) && isdigit(date[8]))
+				return true;
+		}
+	}
+		return false;
+}
+
+bool checkSum(std::string sum)//work clear
+{
+	if (sum == "SUM") 
+		return true;
+	for (int i = 0; i < sum.size(); i++)
+	{
+		if (!isdigit(sum[i]))
+			return false;
+	}
+	return true;
 }

@@ -25,12 +25,13 @@ int autorise(QString login, QString password)
 	//base.open("database.txt");
 	QString sl;
 	QString sp;
+	//char sd;
 	char i = fgetc(base);
 	while (true)
 	{
 		//base.getline(sl, 20, ' ');
 		//base.getline(sp, 20, '\n');
-		while (i != ' ') 
+		while (i != '\t') 
 		{
 			sl = sl + i;
 			if (i == '\n')
@@ -43,21 +44,24 @@ int autorise(QString login, QString password)
 			}
 		}
 		
-	
-		
 		i = fgetc(base);
 		
-		while (i != '\n')
+		while (i != '\t')
 		{
 	     sp = sp + i;
 	     i = fgetc(base);
 		}
 		
-		
+		i=fgetc(base);
 	
         if (login == sl && password == sp)
 		{
+			if (i=='a')
 			return 2;
+			if (i == 'm')
+				return 3;
+			if (i == 'u')
+				return 4;
 			//break;
 		}
 		/*
@@ -82,43 +86,44 @@ void Lab1logandpas::on_pushButton_autorise_clicked()
 	if (autorise(login, password) == 2)
 	{
 
-		if (login == "admin")
+		msgBox.setText("Hello, admin " + login);
+		msgBox.exec();
+	}
+	else 
+	{		
+	//	std::string sl = login.toStdString(); //копирует логин
+		//	std::string sll; // первые 7 символов логина
+		//	sll.insert(0, sl, 0, 7);
+		//	if (sll == "manager")
+		if (autorise(login, password) == 3)
 		{
-			msgBox.setText("Hello "+login);
-			msgBox.exec();
-		}
-		else 
-		{
-			std::string sl = login.toStdString(); //копирует логин
-			std::string sll; // первые 7 символов логина
-			sll.insert(0, sl, 0, 7);
-			if (sll == "manager")
-		    {
 				menu m;
 			m.setModal(true);
 			m.exec();
 			  //msgBox.setText("Hello manager!");
 			 // msgBox.exec();
-		    }
-		   else
-		   {
-			 //msgBox.setText("Hello "+login+"!");
-			 //msgBox.exec();
+		}
+	    else
+		{
+			if (autorise(login, password) == 4)
+			{//msgBox.setText("Hello "+login+"!");
+			//msgBox.exec();
 				showDB m;
 				m.setModal(true);
-			 m.exec();
-		   }
+				m.exec();
+			}
+			else
+	        {
+				msgBox.setText("Wrong login or password");
+				msgBox.setInformativeText("Again?");
+				msgBox.setStandardButtons(QMessageBox::Retry | QMessageBox::Close);
+				msgBox.setDefaultButton(QMessageBox::Save);
+				msgBox.exec();
+	        }
 		}
 	}
-	else
-	{
 	
-		msgBox.setText("Wrong login or password");
-		msgBox.setInformativeText("Again?");
-		msgBox.setStandardButtons(QMessageBox::Retry | QMessageBox::Close);
-		msgBox.setDefaultButton(QMessageBox::Save);
-		msgBox.exec();
-	}
+	
 	/*int res = msgBox.exec();
 	if (res == QMessageBox::Close)
 	{

@@ -1,7 +1,6 @@
 COMPANY	INDUSTRY	DATE	TAX	SUM
-face	rap	2.02.2002	rich	66666
-kirusha	flex	11.03.2019	genius	brain
+FACE	rap	9.02.2002	rich	66666
+Kirusha	flex	11.03.2019	genius	500
 DK	rock	14.03.2019	nolog	20
-Steper	rap	w	w	w
-Moxem	bi	16.03.2019	salto	nose
-w	bi	wwww	w	q
+Steper	rap	15.03.2019	w	228
+Moxem	bi	16.03.2019	salto	300

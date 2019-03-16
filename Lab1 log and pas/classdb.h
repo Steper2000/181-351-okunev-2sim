@@ -14,9 +14,9 @@ struct datas {
 	std::string sum;
 };
 
-//bool checkPred(std::string pred);//Используемые символы - только буквы; Если регистр не тот, меняем на правильный.
+bool checkPred(std::string pred);//Используемые символы - только буквы; Если регистр не тот, меняем на правильный.
 bool checkOtr(std::string otr);
-//bool checkDate(std::string date);//тип данных Date
+bool checkDate(std::string date);//тип данных Date
 //bool checkNal(std::string nal);
 bool checkSum(std::string sum);
 
