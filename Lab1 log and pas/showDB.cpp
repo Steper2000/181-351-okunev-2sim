@@ -85,3 +85,47 @@ showDB::~showDB()
 {
 }
 
+void showDB::on_sort_clicked()
+{
+	model = new QStandardItemModel;
+	QStandardItem *item;
+	QStringList horizontalHeader;
+	horizontalHeader.append("Company");
+	horizontalHeader.append("Industry");
+	horizontalHeader.append("Date");
+	horizontalHeader.append("Tax");
+	horizontalHeader.append("Sum");
+	model->setHorizontalHeaderLabels(horizontalHeader);
+	
+	QString sor= ui.lineEdit->text();
+	std::string so = sor.toStdString();
+	DataBase eshkere;
+	eshkere.download();
+	
+	int id = eshkere.find(so);
+	int i = 0;
+	
+	while(id!=0)
+	{
+		
+		item = new QStandardItem(QString::fromStdString(eshkere.db[id].pred));
+		model->setItem(i, 0, item);
+
+		item = new QStandardItem(QString::fromStdString(eshkere.db[id].otr));
+		model->setItem(i, 1, item);
+
+		item = new QStandardItem(QString::fromStdString(eshkere.db[id].date));
+		model->setItem(i, 2, item);
+
+		item = new QStandardItem(QString::fromStdString(eshkere.db[id].nal));
+		model->setItem(i, 3, item);
+
+		item = new QStandardItem(QString::fromStdString(eshkere.db[id].sum));
+		model->setItem(i, 4, item);
+		id = eshkere.find(so, id);
+		i++;
+	}
+	ui.tableView->setModel(model);
+	ui.tableView->resizeRowsToContents();
+	ui.tableView->resizeColumnsToContents();
+}

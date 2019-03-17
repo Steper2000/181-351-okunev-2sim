@@ -6,7 +6,7 @@
 bool DataBase::add_data(datas tempData)//чётко
 {
 	//download(sdb);
-	if (checkPred(tempData.pred) && checkOtr(tempData.otr) && checkDate(tempData.date) &&checkSum(tempData.sum)) 
+	if (checkPred(tempData.pred) && checkOtr(tempData.otr) && checkDate(tempData.date) && checkNal(tempData.nal) &&checkSum(tempData.sum) ) 
 	{
 		db.push_back(tempData);
 		//transformStr2BD(sdb);
@@ -98,6 +98,20 @@ bool DataBase::del_data(int id)//белиссимо
 int DataBase::find(std::string data2find)//ищет
 {
 	int i = 1;
+	while (i < db.size())
+	{
+		if ((db[i].pred == data2find) || (db[i].otr == data2find) || (db[i].date == data2find) || (db[i].nal == data2find) || (db[i].sum == data2find))
+			return i;
+
+		i++;
+
+	}
+	return 0;
+}
+
+int DataBase::find(std::string data2find, int e)//ищет
+{
+	int i = e+1;
 	while (i < db.size()) 
 	{
 		if ((db[i].pred == data2find) || (db[i].otr == data2find) || (db[i].date == data2find) || (db[i].nal == data2find) || (db[i].sum == data2find))
@@ -187,6 +201,29 @@ return true;
 	}
 		return false;
 }
+
+bool checkNal(std::string nal)
+{
+	std::ifstream ind;
+	ind.open("tax.txt", std::ifstream::in);
+	if (!ind.is_open())
+		return false;
+	std::string d;
+	getline(ind, d);
+	while (d != ".")
+	{
+		if (nal == d)
+		{
+			ind.close();
+			return true;
+		}
+		getline(ind, d);
+
+	}
+	ind.close();
+	return false;
+}
+
 
 bool checkSum(std::string sum)//work clear
 {

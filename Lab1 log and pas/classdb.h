@@ -17,7 +17,7 @@ struct datas {
 bool checkPred(std::string pred);//»спользуемые символы - только буквы; ≈сли регистр не тот, мен€ем на правильный.
 bool checkOtr(std::string otr);
 bool checkDate(std::string date);//тип данных Date
-//bool checkNal(std::string nal);
+bool checkNal(std::string nal);
 bool checkSum(std::string sum);
 
 class DataBase {
@@ -44,8 +44,8 @@ public:
 
 	bool del_data(int id);//удалить запись с заданным id
 
-	
-	int find(std::string data2find);//найти id
+	int find(std::string data2find);
+	int find(std::string data2find, int e);//найти id
 //	template<typename T>
 //std::vector<data> find(int criterior, T data2find);//найти запись с заданным id
 
