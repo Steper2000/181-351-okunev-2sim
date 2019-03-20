@@ -16,4 +16,5 @@ private: Ui::showDB ui;
 		 QStandardItemModel *model;
 private slots:
 	void on_sort_clicked();
+	void on_delsor_clicked();
 };

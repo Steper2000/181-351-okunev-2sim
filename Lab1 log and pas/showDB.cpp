@@ -1,5 +1,6 @@
 #include "showDB.h"
 #include "classdb.h"
+#include <cstdlib>  // для функции atoi
 showDB::showDB(QWidget *parent)
 	: QDialog(parent)
 {
@@ -85,6 +86,56 @@ showDB::~showDB()
 {
 }
 
+void showDB::on_delsor_clicked()
+{
+	//showDB();
+	model = new QStandardItemModel;
+	QStandardItem *item;
+
+	//Заголовки столбцов
+	QStringList horizontalHeader;
+	horizontalHeader.append("Company");
+	horizontalHeader.append("Industry");
+	horizontalHeader.append("Date");
+	horizontalHeader.append("Tax");
+	horizontalHeader.append("Sum");
+
+	//Заголовки строк
+	//QStringList verticalHeader;
+	//verticalHeader.append("Ряд 1");
+	//verticalHeader.append("Ряд 2");
+
+	model->setHorizontalHeaderLabels(horizontalHeader);
+	//model->setVerticalHeaderLabels(verticalHeader);
+
+	DataBase eshkere;
+	eshkere.download();
+
+	for (int i = 1; i < eshkere.db.size(); i++)
+	{
+		//for(int j=0; j<5; j++){}
+		item = new QStandardItem(QString::fromStdString(eshkere.db[i].pred));
+		model->setItem(i - 1, 0, item);
+
+		item = new QStandardItem(QString::fromStdString(eshkere.db[i].otr));
+		model->setItem(i - 1, 1, item);
+
+		item = new QStandardItem(QString::fromStdString(eshkere.db[i].date));
+		model->setItem(i - 1, 2, item);
+
+		item = new QStandardItem(QString::fromStdString(eshkere.db[i].nal));
+		model->setItem(i - 1, 3, item);
+
+		item = new QStandardItem(QString::fromStdString(eshkere.db[i].sum));
+		model->setItem(i - 1, 4, item);
+	}
+
+	ui.tableView->setModel(model);
+
+	ui.tableView->resizeRowsToContents();
+	ui.tableView->resizeColumnsToContents();
+}
+
 void showDB::on_sort_clicked()
 {
 	model = new QStandardItemModel;
@@ -96,34 +147,147 @@ void showDB::on_sort_clicked()
 	horizontalHeader.append("Tax");
 	horizontalHeader.append("Sum");
 	model->setHorizontalHeaderLabels(horizontalHeader);
-	
-	QString sor= ui.lineEdit->text();
-	std::string so = sor.toStdString();
 	DataBase eshkere;
 	eshkere.download();
-	
-	int id = eshkere.find(so);
-	int i = 0;
-	
-	while(id!=0)
+	QString sor= ui.lineEdit->text();
+	int id=0;
+	int j = 0;
+	//на компанию сортирует
+	if (sor != "")
 	{
+		std::string so = sor.toStdString();
+		id = eshkere.find(so);
+		//int i = 0;
+		if(id==0)
+		{
+			item = new QStandardItem(QString::fromStdString("Not in the database"));
+			model->setItem(j, 0, item);
+		}
+		while (id != 0)
+		{
+
+			item = new QStandardItem(QString::fromStdString(eshkere.db[id].pred));
+			model->setItem(j, 0, item);
+
+			item = new QStandardItem(QString::fromStdString(eshkere.db[id].otr));
+			model->setItem(j, 1, item);
+
+			item = new QStandardItem(QString::fromStdString(eshkere.db[id].date));
+			model->setItem(j, 2, item);
+
+			item = new QStandardItem(QString::fromStdString(eshkere.db[id].nal));
+			model->setItem(j, 3, item);
+
+			item = new QStandardItem(QString::fromStdString(eshkere.db[id].sum));
+			model->setItem(j, 4, item);
+			id = eshkere.find(so, id);
+			j++;
+		}
 		
-		item = new QStandardItem(QString::fromStdString(eshkere.db[id].pred));
-		model->setItem(i, 0, item);
+	}
+	else
+	{
+		item = new QStandardItem(QString::fromStdString("Why are you press me!?"));
+		model->setItem(j, 0, item);
+	}
+	//на сумму сортирует
+	if (ui.lineEdit_5->text()!= "")
+	{
+		sor = ui.lineEdit_5->text();
+		std::string sso = sor.toStdString();
+		int cif;
+		//int j=0;
+		if (sso[0]=='<')
+		{
+			//std::string::size_type sz;
+			sso.erase(sso.begin());
+			cif = std::stoi(sso);
+			
+			for (int i = 1; i < eshkere.db.size(); i++)
+			{
+				id = std::stoi(eshkere.db[i].sum);
+				
+				if(id < cif)
+				{
+					item = new QStandardItem(QString::fromStdString(eshkere.db[i].pred));
+					model->setItem(j, 0, item);
 
-		item = new QStandardItem(QString::fromStdString(eshkere.db[id].otr));
-		model->setItem(i, 1, item);
+					item = new QStandardItem(QString::fromStdString(eshkere.db[i].otr));
+					model->setItem(j, 1, item);
 
-		item = new QStandardItem(QString::fromStdString(eshkere.db[id].date));
-		model->setItem(i, 2, item);
+					item = new QStandardItem(QString::fromStdString(eshkere.db[i].date));
+					model->setItem(j, 2, item);
 
-		item = new QStandardItem(QString::fromStdString(eshkere.db[id].nal));
-		model->setItem(i, 3, item);
+					item = new QStandardItem(QString::fromStdString(eshkere.db[i].nal));
+					model->setItem(j, 3, item);
 
-		item = new QStandardItem(QString::fromStdString(eshkere.db[id].sum));
-		model->setItem(i, 4, item);
-		id = eshkere.find(so, id);
-		i++;
+					item = new QStandardItem(QString::fromStdString(eshkere.db[i].sum));
+					model->setItem(j, 4, item);
+					j++;
+				}
+		    }
+		}
+		else
+		{
+			if (sso[0] == '>')
+			{
+				sso.erase(sso.begin());
+				cif = std::stoi(sso);
+				
+				for (int i = 1; i < eshkere.db.size(); i++)
+				{
+					id = std::stoi(eshkere.db[i].sum);
+
+					if (id > cif)
+					{
+						item = new QStandardItem(QString::fromStdString(eshkere.db[i].pred));
+						model->setItem(j, 0, item);
+
+						item = new QStandardItem(QString::fromStdString(eshkere.db[i].otr));
+						model->setItem(j, 1, item);
+
+						item = new QStandardItem(QString::fromStdString(eshkere.db[i].date));
+						model->setItem(j, 2, item);
+
+						item = new QStandardItem(QString::fromStdString(eshkere.db[i].nal));
+						model->setItem(j, 3, item);
+
+						item = new QStandardItem(QString::fromStdString(eshkere.db[i].sum));
+						model->setItem(j, 4, item);
+						j++;
+					}
+				}
+			}
+			else
+			{
+				//sso.erase(sso.begin());
+				cif = std::stoi(sso);
+				
+				for (int i = 1; i < eshkere.db.size(); i++)
+				{
+					id = std::stoi(eshkere.db[i].sum);
+
+					if (id == cif)
+					{
+						item = new QStandardItem(QString::fromStdString(eshkere.db[i].pred));
+						model->setItem(j, 0, item);
+
+						item = new QStandardItem(QString::fromStdString(eshkere.db[i].otr));
+						model->setItem(j, 1, item);
+
+						item = new QStandardItem(QString::fromStdString(eshkere.db[i].date));
+						model->setItem(j, 2, item);
+
+						item = new QStandardItem(QString::fromStdString(eshkere.db[i].nal));
+						model->setItem(j, 3, item);
+
+						item = new QStandardItem(QString::fromStdString(eshkere.db[i].sum));
+						model->setItem(j, 4, item);
+						j++;
+					}
+				}
+			}
+		}
 	}
 	ui.tableView->setModel(model);
 	ui.tableView->resizeRowsToContents();
