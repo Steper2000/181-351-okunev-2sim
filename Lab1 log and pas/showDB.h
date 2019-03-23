@@ -4,6 +4,8 @@
 #include <QDialog>
 #include "ui_showDB.h"
 #include "classdb.h"
+#include <QMessageBox>
+
 
 class showDB : public QDialog, public Ui::showDB//, public classdb
 {

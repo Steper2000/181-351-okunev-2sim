@@ -89,7 +89,7 @@ void DataBase::transformStr2BD(std::string sdb)// чётко
 
 bool DataBase::del_data(int id)//белиссимо
 {
-	if(id==0)
+	if(id==-1)//////опасное место.........................................................................................................................
 	return false;
 	db.erase(db.begin() + id);
 	return true;
@@ -106,7 +106,7 @@ int DataBase::find(std::string data2find)//ищет
 		i++;
 
 	}
-	return 0;
+	return -1;//....................................................и тут тоже
 }
 
 int DataBase::find(std::string data2find, int e)//ищет
@@ -120,7 +120,7 @@ int DataBase::find(std::string data2find, int e)//ищет
 			i++;
 			
 	}
-	return 0;
+	return -1;//..........................................................
 }
 
 bool DataBase::write2file()//блестяще

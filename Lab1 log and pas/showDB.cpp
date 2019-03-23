@@ -1,5 +1,4 @@
 #include "showDB.h"
-#include "classdb.h"
 #include <cstdlib>  // для функции atoi
 showDB::showDB(QWidget *parent)
 	: QDialog(parent)
@@ -86,6 +85,7 @@ showDB::~showDB()
 {
 }
 
+
 void showDB::on_delsor_clicked()
 {
 	//showDB();
@@ -147,23 +147,223 @@ void showDB::on_sort_clicked()
 	horizontalHeader.append("Tax");
 	horizontalHeader.append("Sum");
 	model->setHorizontalHeaderLabels(horizontalHeader);
-	DataBase eshkere;
+	DataBase eshkere, tab;
 	eshkere.download();
 	QString sor= ui.lineEdit->text();
-	int id=0;
-	int j = 0;
+	std::string so = sor.toStdString();
+	int id;
+	
 	//на компанию сортирует
-	if (sor != "")
+	if (so != "")
 	{
-		std::string so = sor.toStdString();
 		id = eshkere.find(so);
 		//int i = 0;
-		if(id==0)
+		if (id == -1)
 		{
-			item = new QStandardItem(QString::fromStdString("Not in the database"));
-			model->setItem(j, 0, item);
+			QMessageBox m;
+			m.setText("Not in database");
+			m.exec();
 		}
-		while (id != 0)
+		while (id!=-1)
+		{
+			tab.add_data(eshkere.db[id]);
+			id = eshkere.find(so, id);
+		}
+	}
+	
+	QString ssor = ui.lineEdit_2->text();
+	std::string sso = ssor.toStdString();
+	if (sso != "")
+	{
+		
+		id = eshkere.find(sso, -1);
+		//int i = 0;
+		if (id == -1)
+		{
+			QMessageBox m;
+			m.setText("Not in database");
+			m.exec();
+		}
+		else 
+		{
+			//for(int i=0; i<tab.db.size();)
+			if (so != "")
+			{
+				int r;
+					for (int i = 0; i < tab.db.size(); i++)
+					{
+					
+						if (i != tab.find(sso, i - 1))
+						{
+							tab.del_data(i);
+							i--;
+						}
+					}
+				
+			}
+			else 
+			{
+				while (id != -1)
+				{
+					tab.add_data(eshkere.db[id]);
+					id = eshkere.find(sso, id);
+				}
+			}
+		}
+	}
+
+	QString sssor = ui.lineEdit_3->text();
+	std::string ssso = sssor.toStdString();
+	if (ssso != "")
+	{
+
+		id = eshkere.find(ssso, -1);
+		//int i = 0;
+		if (id == -1)
+		{
+			QMessageBox m;
+			m.setText("Not in database");
+			m.exec();
+		}
+		else
+		{
+			//for(int i=0; i<tab.db.size();)
+			if (so != "")
+			{
+				int r;
+				for (int i = 0; i < tab.db.size(); i++)
+				{
+					r = tab.find(ssso, i - 1);
+					if (i != r)
+					{
+						tab.del_data(i); 
+						i--;
+					}
+				}
+
+			}
+			else
+			{
+				if (sso != "")
+				{
+					int r;
+					for (int i = 0; i < tab.db.size(); i++)
+					{
+						r = tab.find(ssso, i - 1);
+						if (i != r)
+						{
+							tab.del_data(i); 
+							i--;
+						}
+					}
+			    }
+				else 
+				{
+					while (id != -1)
+					{
+						tab.add_data(eshkere.db[id]);
+						id = eshkere.find(ssso, id);
+					}
+				}
+			}
+		}
+	}
+	
+	QString ssssor = ui.lineEdit_4->text();
+	std::string sssso = ssssor.toStdString();
+	if (sssso != "")
+	{
+
+		id = eshkere.find(sssso, -1);
+		//int i = 0;
+		if (id == -1)
+		{
+			QMessageBox m;
+			m.setText("Not in database");
+			m.exec();
+		}
+		else
+		{
+			//for(int i=0; i<tab.db.size();)
+			if (so != "")
+			{
+				int r;
+				for (int i = 0; i < tab.db.size(); i++)
+				{
+					r = tab.find(sssso, i - 1);
+					if (i != r)
+					{
+						tab.del_data(i);
+						i--;
+					}
+				}
+
+			}
+			else
+			{
+				if (sso != "")
+				{
+					int r;
+					for (int i = 0; i < tab.db.size(); i++)
+					{
+						r = tab.find(sssso, i - 1);
+						if (i != r)
+						{
+							tab.del_data(i);
+							i--;
+						}
+					}
+				}
+				else
+				{
+					if (ssso != "")
+					{
+						int r;
+						for (int i = 0; i < tab.db.size(); i++)
+						{
+							r = tab.find(sssso, i - 1);
+							if (i != r)
+							{
+								tab.del_data(i);
+								i--;
+							}
+						}
+					}
+
+					else 
+					{
+						while (id != -1)
+						{
+							tab.add_data(eshkere.db[id]);
+							id = eshkere.find(sssso, id);
+						}
+					}
+				}
+			}
+		}
+	}
+	QString vor = ui.lineEdit_5->text();
+	std::string vo = ssssor.toStdString();
+	if (vor != "")
+	{
+		id = eshkere.find(vo, -1);
+		//int i = 0;
+		if (id == -1)
+		{
+			QMessageBox m;
+			m.setText("Not in database");
+			m.exec();
+		}
+		else
+		{
+			//for(int i=0; i<tab.db.size();)
+			if (so != "")
+			{
+				chil(tab, vo);//----------------------------------------------------------------
+			}
+		}
+	}
+	/*while (id != 0)
 		{
 
 			item = new QStandardItem(QString::fromStdString(eshkere.db[id].pred));
@@ -190,6 +390,9 @@ void showDB::on_sort_clicked()
 		item = new QStandardItem(QString::fromStdString("Why are you press me!?"));
 		model->setItem(j, 0, item);
 	}
+	
+	
+	
 	//на сумму сортирует
 	if (ui.lineEdit_5->text()!= "")
 	{
@@ -288,8 +491,88 @@ void showDB::on_sort_clicked()
 				}
 			}
 		}
-	}
-	ui.tableView->setModel(model);
+	}*/
+	
+for (int i = 0; i < tab.db.size(); i++)
+{
+	item = new QStandardItem(QString::fromStdString(tab.db[i].pred));
+	model->setItem(i , 0, item);
+
+	item = new QStandardItem(QString::fromStdString(tab.db[i].otr));
+	model->setItem(i, 1, item);
+
+	item = new QStandardItem(QString::fromStdString(tab.db[i].date));
+	model->setItem(i , 2, item);
+
+	item = new QStandardItem(QString::fromStdString(tab.db[i].nal));
+	model->setItem(i , 3, item);
+
+	item = new QStandardItem(QString::fromStdString(tab.db[i].sum));
+	model->setItem(i , 4, item);
+}
+
+    ui.tableView->setModel(model);
 	ui.tableView->resizeRowsToContents();
 	ui.tableView->resizeColumnsToContents();
+}
+
+void chil(DataBase eshkere, std::string sso) 
+{
+	int cif;
+	//int j=0;
+	if (sso[0] == '<')
+	{
+		//std::string::size_type sz;
+		sso.erase(sso.begin());
+		cif = std::stoi(sso);
+		int id;
+		for (int i = 1; i < eshkere.db.size(); i++)
+		{
+			id = std::stoi(eshkere.db[i].sum);
+
+			if (id >= cif)
+			{
+				eshkere.del_data(i);
+				i--;
+			}
+		}
+	}
+	else
+	{
+		if (sso[0] == '>')
+		{
+			sso.erase(sso.begin());
+			cif = std::stoi(sso);
+
+			int id;
+			for (int i = 1; i < eshkere.db.size(); i++)
+			{
+				id = std::stoi(eshkere.db[i].sum);
+
+				if (id <= cif)
+				{
+					eshkere.del_data(i);
+					i--;
+				}
+			}
+		}
+		else
+		{
+			
+			//sso.erase(sso.begin());
+			cif = std::stoi(sso);
+
+			int id;
+			for (int i = 1; i < eshkere.db.size(); i++)
+			{
+				id = std::stoi(eshkere.db[i].sum);
+
+				if (id != cif)
+				{
+					eshkere.del_data(i);
+					i--;
+				}
+			}
+		}
+	}
 }
