@@ -85,6 +85,108 @@ showDB::~showDB()
 {
 }
 
+void chil(DataBase &eshkere, std::string sso)
+{
+	int cif;
+	//int j=0;
+	if (sso[0] == '<')
+	{
+		if (sso[1] == '=')
+		{
+			sso.erase(sso.begin());
+			sso.erase(sso.begin());
+			cif = std::stoi(sso);
+			int id;
+			for (int i = 0; i < eshkere.db.size(); i++)
+			{
+				id = std::stoi(eshkere.db[i].sum);
+
+				if (id > cif)
+				{
+					eshkere.del_data(i);
+					i--;
+				}
+			}
+		}
+		else 
+		{
+			//std::string::size_type sz;
+			sso.erase(sso.begin());
+			cif = std::stoi(sso);
+			int id;
+			for (int i = 0; i < eshkere.db.size(); i++)
+			{
+				id = std::stoi(eshkere.db[i].sum);
+
+				if (id >= cif)
+				{
+					eshkere.del_data(i);
+					i--;
+				}
+			}
+		}
+	}
+	else
+	{
+		if (sso[0] == '>')
+		{
+			
+			if (sso[1] == '=')
+			{
+				sso.erase(sso.begin());
+				sso.erase(sso.begin());
+				cif = std::stoi(sso);
+				int id;
+				for (int i = 0; i < eshkere.db.size(); i++)
+				{
+					id = std::stoi(eshkere.db[i].sum);
+
+					if (id < cif)
+					{
+						eshkere.del_data(i);
+						i--;
+					}
+				}
+			}
+			else
+			{
+				sso.erase(sso.begin());
+				cif = std::stoi(sso);
+
+				int id;
+				for (int i = 0; i < eshkere.db.size(); i++)
+				{
+					id = std::stoi(eshkere.db[i].sum);
+
+					if (id <= cif)
+					{
+						eshkere.del_data(i);
+						i--;
+					}
+				}
+			}
+		}
+		else
+		{
+
+			//sso.erase(sso.begin());
+			cif = std::stoi(sso);
+
+			int id;
+			for (int i = 0; i < eshkere.db.size(); i++)
+			{
+				id = std::stoi(eshkere.db[i].sum);
+
+				if (id != cif)
+				{
+					eshkere.del_data(i);
+					i--;
+				}
+			}
+		}
+	}
+}
+
 
 void showDB::on_delsor_clicked()
 {
@@ -171,6 +273,7 @@ void showDB::on_sort_clicked()
 		}
 	}
 	
+	//на отрасль сортирует
 	QString ssor = ui.lineEdit_2->text();
 	std::string sso = ssor.toStdString();
 	if (sso != "")
@@ -211,7 +314,8 @@ void showDB::on_sort_clicked()
 			}
 		}
 	}
-
+	
+	//на дату сортирует
 	QString sssor = ui.lineEdit_3->text();
 	std::string ssso = sssor.toStdString();
 	if (ssso != "")
@@ -269,6 +373,7 @@ void showDB::on_sort_clicked()
 		}
 	}
 	
+	//на налог сортирует
 	QString ssssor = ui.lineEdit_4->text();
 	std::string sssso = ssssor.toStdString();
 	if (sssso != "")
@@ -342,26 +447,46 @@ void showDB::on_sort_clicked()
 			}
 		}
 	}
+	
+	//на сумму сортирует
 	QString vor = ui.lineEdit_5->text();
-	std::string vo = ssssor.toStdString();
+	std::string vo = vor.toStdString();
 	if (vor != "")
 	{
-		id = eshkere.find(vo, -1);
-		//int i = 0;
-		if (id == -1)
+		if (so != "")
 		{
-			QMessageBox m;
-			m.setText("Not in database");
-			m.exec();
+			chil(tab, vo);
 		}
 		else
 		{
-			//for(int i=0; i<tab.db.size();)
-			if (so != "")
+			if (sso != "")
 			{
-				chil(tab, vo);//----------------------------------------------------------------
+				chil(tab, vo);
+			}
+			else
+			{
+				if (ssso != "")
+				{
+					chil(tab, vo);
+				}
+				else
+				{
+					if (sssso != "")
+					{
+						chil(tab, vo);
+					}
+					else
+					{
+						for (int i = 1; i < eshkere.db.size()-1; i++)
+						{
+							tab.add_data(eshkere.db[i]);
+						}
+						chil(tab, vo);
+					}
+				}
 			}
 		}
+		
 	}
 	/*while (id != 0)
 		{
@@ -516,63 +641,3 @@ for (int i = 0; i < tab.db.size(); i++)
 	ui.tableView->resizeColumnsToContents();
 }
 
-void chil(DataBase eshkere, std::string sso) 
-{
-	int cif;
-	//int j=0;
-	if (sso[0] == '<')
-	{
-		//std::string::size_type sz;
-		sso.erase(sso.begin());
-		cif = std::stoi(sso);
-		int id;
-		for (int i = 1; i < eshkere.db.size(); i++)
-		{
-			id = std::stoi(eshkere.db[i].sum);
-
-			if (id >= cif)
-			{
-				eshkere.del_data(i);
-				i--;
-			}
-		}
-	}
-	else
-	{
-		if (sso[0] == '>')
-		{
-			sso.erase(sso.begin());
-			cif = std::stoi(sso);
-
-			int id;
-			for (int i = 1; i < eshkere.db.size(); i++)
-			{
-				id = std::stoi(eshkere.db[i].sum);
-
-				if (id <= cif)
-				{
-					eshkere.del_data(i);
-					i--;
-				}
-			}
-		}
-		else
-		{
-			
-			//sso.erase(sso.begin());
-			cif = std::stoi(sso);
-
-			int id;
-			for (int i = 1; i < eshkere.db.size(); i++)
-			{
-				id = std::stoi(eshkere.db[i].sum);
-
-				if (id != cif)
-				{
-					eshkere.del_data(i);
-					i--;
-				}
-			}
-		}
-	}
-}
