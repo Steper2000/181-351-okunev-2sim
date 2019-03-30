@@ -19,12 +19,12 @@ public:
 public slots:
 	void slotNewConnection();//вход
 	void slotClientDis();//выход
-	void slotServerRead();// чтение
-	//void slotReadClient();
+	//void slotServerRead();// чтение
+	void slotReadClient();
 
 private:
 	QTcpServer * mtser;
-	QTcpSocket * mtsoc;
+	//QTcpSocket * mtsoc;
 	int server_status;
-	//QMap<int,QTcpSocket *> SClient;
+	QMap<int,QTcpSocket *> SClient;
 };

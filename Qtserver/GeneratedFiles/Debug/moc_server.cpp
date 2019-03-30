@@ -35,11 +35,11 @@ QT_MOC_LITERAL(0, 0, 6), // "server"
 QT_MOC_LITERAL(1, 7, 17), // "slotNewConnection"
 QT_MOC_LITERAL(2, 25, 0), // ""
 QT_MOC_LITERAL(3, 26, 13), // "slotClientDis"
-QT_MOC_LITERAL(4, 40, 14) // "slotServerRead"
+QT_MOC_LITERAL(4, 40, 14) // "slotReadClient"
 
     },
     "server\0slotNewConnection\0\0slotClientDis\0"
-    "slotServerRead"
+    "slotReadClient"
 };
 #undef QT_MOC_LITERAL
 
@@ -77,7 +77,7 @@ void server::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         switch (_id) {
         case 0: _t->slotNewConnection(); break;
         case 1: _t->slotClientDis(); break;
-        case 2: _t->slotServerRead(); break;
+        case 2: _t->slotReadClient(); break;
         default: ;
         }
     }
