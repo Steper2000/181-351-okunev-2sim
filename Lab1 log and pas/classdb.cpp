@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <cctype>   // для функции isdigit
-//#include <cstdlib>  // для функции atoi
+#include <cstdlib>  // для функции atoi
 bool DataBase::add_data(datas tempData)//чётко
 {
 	//download(sdb);
@@ -186,17 +186,88 @@ bool checkDate(std::string date)
 return true;
 	if (!isdigit(date[0]))
 		return false;
+	
+	//if ()
 	if (isdigit(date[1]))
 	{
-		if (isdigit(date[3]) && isdigit(date[4]) && (date[5] == '.') && isdigit(date[6]) && isdigit(date[7]) && isdigit(date[8]) && isdigit(date[9]))
-			return true;
+		int d=0;
+		int m= 0;
+		int y = 0;
+		if ((date[2] == '.') && isdigit(date[3]) && isdigit(date[4]) && (date[5] == '.') && isdigit(date[6]) && isdigit(date[7]) && isdigit(date[8]) && isdigit(date[9]))
+		{
+			for (int i = 0; i < 2; i++) {
+				d = d * 10 + date[i] - 0x30;
+			}
+			for (int i = 3; i < 5; i++) {
+				m = m * 10 + date[i] - 0x30;// 
+			}
+			for (int i = 6; i < 10; i++) {
+				y = y * 10 + date[i] - 0x30;// std::stoi(date) - 0x30;
+			}
+			if (m > 0 && m <= 12)
+			{
+				if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12)
+				{
+					if (d <= 31 && d > 0)
+						return true;
+				}
+				else
+				{
+					if (m == 2)
+					{
+						if (d <= 29 && d > 0)
+							return true;
+					}
+					else
+					{
+						if (d <= 30 && d > 0)
+							return true;
+					}
+				}
+			}
+		}
 	}
 	else
 	{
 		if (date[1] == '.')
 		{
 			if (isdigit(date[2]) && isdigit(date[3]) && (date[4] == '.') && isdigit(date[5]) && isdigit(date[6]) && isdigit(date[7]) && isdigit(date[8]))
-				return true;
+			{
+				int d = 0;
+				int m = 0;
+				int y = 0;
+				for (int i = 0; i < 1; i++) {
+					d = d * 10 + date[i] - 0x30;
+				}
+				for (int i = 2; i < 4; i++) {
+					m = m * 10 + date[i] - 0x30;// 
+				}
+				for (int i = 5; i < 9; i++) {
+					y = y * 10 + date[i] - 0x30;// std::stoi(date) - 0x30;
+				}
+				if (m > 0 && m <= 12)
+				{
+					if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12)
+					{
+						if (d <= 31 && d > 0)
+							return true;
+					}
+					else
+					{
+						if (m == 2)
+						{
+							if (d <= 29 && d > 0)
+								return true;
+						}
+						else
+						{
+							if (d <= 30 && d > 0)
+								return true;
+						}
+					}
+				}
+			}
+				
 		}
 	}
 		return false;

@@ -79,6 +79,6 @@ void add::on_pushButton_add_clicked() //добавляет чётко
 		m.exec();
 	}
 	else{ QMessageBox m;
-		m.setText("Data don't add! Wrong Industry or Sum or Date!");
+		m.setText("Data don't add! Wrong Industry or Sum or Date or Tax!");
 		m.exec(); }
 }

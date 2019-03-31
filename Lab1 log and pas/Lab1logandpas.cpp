@@ -134,6 +134,11 @@ void Lab1logandpas::on_pushButton_autorise_clicked()
 
 void Lab1logandpas::on_Ftest_clicked()
 {	
+	checkDate("1.10.2000");
+	checkDate("10.10.2000");
+	checkDate("41.10.2000");
+	checkDate("1.50.2000");
+	/*
 	datas da;
 	da.pred = "alax";
 	da.date = "1.06.2001";
@@ -152,5 +157,5 @@ void Lab1logandpas::on_Ftest_clicked()
 	s.add_data(das);
 	s.find("indulg");
 	s.del_data(1);
-	s.write2file();
+	s.write2file();*/
 }
