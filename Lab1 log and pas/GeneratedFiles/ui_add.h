@@ -18,7 +18,6 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -27,7 +26,7 @@ class Ui_add
 public:
     QHBoxLayout *horizontalLayout_8;
     QGroupBox *groupBox;
-    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout_4;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QLabel *label_comp;
@@ -46,7 +45,7 @@ public:
     QLineEdit *ls;
     QPushButton *pushButton_add;
     QGroupBox *groupBox_2;
-    QWidget *widget;
+    QVBoxLayout *verticalLayout_3;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_7;
     QLabel *label_del1;
@@ -60,31 +59,30 @@ public:
     {
         if (add->objectName().isEmpty())
             add->setObjectName(QString::fromUtf8("add"));
-        add->resize(747, 427);
+        add->resize(747, 373);
         horizontalLayout_8 = new QHBoxLayout(add);
         horizontalLayout_8->setSpacing(6);
         horizontalLayout_8->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
         groupBox = new QGroupBox(add);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        layoutWidget = new QWidget(groupBox);
-        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(30, 40, 301, 241));
-        verticalLayout = new QVBoxLayout(layoutWidget);
+        verticalLayout_4 = new QVBoxLayout(groupBox);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        label_comp = new QLabel(layoutWidget);
+        label_comp = new QLabel(groupBox);
         label_comp->setObjectName(QString::fromUtf8("label_comp"));
         label_comp->setFrameShadow(QFrame::Plain);
 
         horizontalLayout->addWidget(label_comp);
 
-        lc = new QLineEdit(layoutWidget);
+        lc = new QLineEdit(groupBox);
         lc->setObjectName(QString::fromUtf8("lc"));
 
         horizontalLayout->addWidget(lc);
@@ -95,12 +93,12 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        label_industry = new QLabel(layoutWidget);
+        label_industry = new QLabel(groupBox);
         label_industry->setObjectName(QString::fromUtf8("label_industry"));
 
         horizontalLayout_2->addWidget(label_industry);
 
-        li = new QLineEdit(layoutWidget);
+        li = new QLineEdit(groupBox);
         li->setObjectName(QString::fromUtf8("li"));
 
         horizontalLayout_2->addWidget(li);
@@ -111,12 +109,12 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        label_date = new QLabel(layoutWidget);
+        label_date = new QLabel(groupBox);
         label_date->setObjectName(QString::fromUtf8("label_date"));
 
         horizontalLayout_3->addWidget(label_date);
 
-        ld = new QLineEdit(layoutWidget);
+        ld = new QLineEdit(groupBox);
         ld->setObjectName(QString::fromUtf8("ld"));
 
         horizontalLayout_3->addWidget(ld);
@@ -127,12 +125,12 @@ public:
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        label_nal = new QLabel(layoutWidget);
+        label_nal = new QLabel(groupBox);
         label_nal->setObjectName(QString::fromUtf8("label_nal"));
 
         horizontalLayout_4->addWidget(label_nal);
 
-        ln = new QLineEdit(layoutWidget);
+        ln = new QLineEdit(groupBox);
         ln->setObjectName(QString::fromUtf8("ln"));
 
         horizontalLayout_4->addWidget(ln);
@@ -143,12 +141,12 @@ public:
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        label_sum = new QLabel(layoutWidget);
+        label_sum = new QLabel(groupBox);
         label_sum->setObjectName(QString::fromUtf8("label_sum"));
 
         horizontalLayout_5->addWidget(label_sum);
 
-        ls = new QLineEdit(layoutWidget);
+        ls = new QLineEdit(groupBox);
         ls->setObjectName(QString::fromUtf8("ls"));
 
         horizontalLayout_5->addWidget(ls);
@@ -156,33 +154,35 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_5);
 
-        pushButton_add = new QPushButton(layoutWidget);
+        pushButton_add = new QPushButton(groupBox);
         pushButton_add->setObjectName(QString::fromUtf8("pushButton_add"));
 
         verticalLayout->addWidget(pushButton_add);
+
+
+        verticalLayout_4->addLayout(verticalLayout);
 
 
         horizontalLayout_8->addWidget(groupBox);
 
         groupBox_2 = new QGroupBox(add);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        widget = new QWidget(groupBox_2);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(10, 40, 263, 96));
-        verticalLayout_2 = new QVBoxLayout(widget);
+        verticalLayout_3 = new QVBoxLayout(groupBox_2);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setSpacing(6);
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        label_del1 = new QLabel(widget);
+        label_del1 = new QLabel(groupBox_2);
         label_del1->setObjectName(QString::fromUtf8("label_del1"));
 
         horizontalLayout_7->addWidget(label_del1);
 
-        ld1 = new QLineEdit(widget);
+        ld1 = new QLineEdit(groupBox_2);
         ld1->setObjectName(QString::fromUtf8("ld1"));
 
         horizontalLayout_7->addWidget(ld1);
@@ -193,12 +193,12 @@ public:
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        label_del2 = new QLabel(widget);
+        label_del2 = new QLabel(groupBox_2);
         label_del2->setObjectName(QString::fromUtf8("label_del2"));
 
         horizontalLayout_6->addWidget(label_del2);
 
-        ld2 = new QLineEdit(widget);
+        ld2 = new QLineEdit(groupBox_2);
         ld2->setObjectName(QString::fromUtf8("ld2"));
 
         horizontalLayout_6->addWidget(ld2);
@@ -206,10 +206,13 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_6);
 
-        pushButton_del = new QPushButton(widget);
+        pushButton_del = new QPushButton(groupBox_2);
         pushButton_del->setObjectName(QString::fromUtf8("pushButton_del"));
 
         verticalLayout_2->addWidget(pushButton_del);
+
+
+        verticalLayout_3->addLayout(verticalLayout_2);
 
 
         horizontalLayout_8->addWidget(groupBox_2);

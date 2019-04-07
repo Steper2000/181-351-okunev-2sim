@@ -1,10 +1,12 @@
-admin	123	a
 manager	321	m
 manager2	222	m
 manager_Stependii	f	m
 user	45	u
 user2	56	u
-q	q	u
 Kirill	batar	m
 Danila	spulivan	a
-
+a	a	a
+w	w	a
+q	q	a
+admin	123	a
+a	r	u

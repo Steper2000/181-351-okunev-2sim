@@ -190,7 +190,7 @@ void chil(DataBase &eshkere, std::string sso)
 
 void showDB::on_delsor_clicked()
 {
-	//showDB();
+	
 	model = new QStandardItemModel;
 	QStandardItem *item;
 

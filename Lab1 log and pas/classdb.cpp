@@ -146,6 +146,24 @@ bool DataBase::write2file()//блестяще
 	return true;
 }
 
+QString autorize(QString login, QString pass)
+{
+	if (login == "adm" && pass == "123")
+		return "admin";
+	else 
+	{
+		if (login == "man" && pass == "1234")
+			return "manager";
+		else
+		{
+			if (login == "user" && pass == "12")
+			return "user";
+			else return "error";
+		}
+	}
+	
+}
+
 bool checkPred(std::string pred)
 {
 	for (int i = 0; i < pred.size(); i++)
@@ -294,7 +312,6 @@ bool checkNal(std::string nal)
 	ind.close();
 	return false;
 }
-
 
 bool checkSum(std::string sum)//work clear
 {

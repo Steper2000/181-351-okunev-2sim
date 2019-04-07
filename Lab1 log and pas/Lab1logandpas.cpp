@@ -5,6 +5,8 @@
 #include <string>
 #include "classdb.h"
 #include "showDB.h"
+#include "admenu.h"
+#include "LPbase.h"
 //#include <fstream>
 
 Lab1logandpas::Lab1logandpas(QWidget *parent)
@@ -85,9 +87,11 @@ void Lab1logandpas::on_pushButton_autorise_clicked()
 	
 	if (autorise(login, password) == 2)
 	{
-
-		msgBox.setText("Hello, admin " + login);
-		msgBox.exec();
+		admenu m;
+		m.setModal(true);
+		m.exec();
+		//msgBox.setText("Hello, admin " + login);
+		//msgBox.exec();
 	}
 	else 
 	{		
@@ -134,10 +138,25 @@ void Lab1logandpas::on_pushButton_autorise_clicked()
 
 void Lab1logandpas::on_Ftest_clicked()
 {	
-	checkDate("1.10.2000");
-	checkDate("10.10.2000");
-	checkDate("41.10.2000");
-	checkDate("1.50.2000");
+	/*
+	lopal lol;
+	//QString a = ui.line_Nlogin->text();
+	lol.log = "w";//a.toStdString();
+	//QString b = ui.line_Npassword->text();
+	lol.pas = "w";//b.toStdString();
+	//QString c = ui.line_level->text();
+	lol.lev = "a";//c.toStdString();
+	LPbase lpb;
+	lpb.download();
+	lpb.add_data(lol);
+	int o =lpb.find("q");
+	lpb.del_data(o);
+	lpb.write2file();
+	*/
+	//checkDate("1.10.2000");
+	//checkDate("10.10.2000");
+	//checkDate("41.10.2000");
+	//checkDate("1.50.2000");
 	/*
 	datas da;
 	da.pred = "alax";

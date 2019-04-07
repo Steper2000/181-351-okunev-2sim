@@ -20,6 +20,15 @@
     <ClCompile Include="showDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="admenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LPbase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LPtatle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resource Files">
@@ -59,6 +68,12 @@
     <QtMoc Include="showDB.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="admenu.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="LPtatle.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Lab1logandpas.ui">
@@ -76,6 +91,12 @@
     <QtUic Include="showDB.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="admenu.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="LPtatle.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Lab1logandpas.qrc">
@@ -84,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classdb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LPbase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

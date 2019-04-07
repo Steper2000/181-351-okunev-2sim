@@ -12,89 +12,70 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_change
 {
 public:
-    QWidget *layoutWidget;
+    QHBoxLayout *horizontalLayout_8;
+    QGroupBox *groupBox_2;
+    QHBoxLayout *horizontalLayout_7;
     QVBoxLayout *verticalLayout_2;
-    QHBoxLayout *horizontalLayout_3;
-    QLabel *label_blog;
-    QLineEdit *line_blogin;
-    QHBoxLayout *horizontalLayout_4;
-    QLabel *label_bpass;
-    QLineEdit *line_bpass;
     QHBoxLayout *horizontalLayout;
     QLabel *label_Nlogin;
     QLineEdit *line_Nlogin;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_Npassword;
     QLineEdit *line_Npassword;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *lev;
+    QLineEdit *line_level;
     QPushButton *pushButton_change;
-    QLabel *newwelc;
+    QGroupBox *groupBox;
+    QHBoxLayout *horizontalLayout_6;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_2;
+    QLineEdit *del_id;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *label;
+    QLineEdit *del_d;
+    QPushButton *del;
 
     void setupUi(QDialog *change)
     {
         if (change->objectName().isEmpty())
             change->setObjectName(QString::fromUtf8("change"));
-        change->resize(479, 326);
-        layoutWidget = new QWidget(change);
-        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(60, 70, 251, 176));
-        verticalLayout_2 = new QVBoxLayout(layoutWidget);
+        change->resize(620, 317);
+        horizontalLayout_8 = new QHBoxLayout(change);
+        horizontalLayout_8->setSpacing(6);
+        horizontalLayout_8->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        groupBox_2 = new QGroupBox(change);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        horizontalLayout_7 = new QHBoxLayout(groupBox_2);
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        label_blog = new QLabel(layoutWidget);
-        label_blog->setObjectName(QString::fromUtf8("label_blog"));
-
-        horizontalLayout_3->addWidget(label_blog);
-
-        line_blogin = new QLineEdit(layoutWidget);
-        line_blogin->setObjectName(QString::fromUtf8("line_blogin"));
-
-        horizontalLayout_3->addWidget(line_blogin);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_3);
-
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        label_bpass = new QLabel(layoutWidget);
-        label_bpass->setObjectName(QString::fromUtf8("label_bpass"));
-
-        horizontalLayout_4->addWidget(label_bpass);
-
-        line_bpass = new QLineEdit(layoutWidget);
-        line_bpass->setObjectName(QString::fromUtf8("line_bpass"));
-
-        horizontalLayout_4->addWidget(line_bpass);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_4);
-
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        label_Nlogin = new QLabel(layoutWidget);
+        label_Nlogin = new QLabel(groupBox_2);
         label_Nlogin->setObjectName(QString::fromUtf8("label_Nlogin"));
 
         horizontalLayout->addWidget(label_Nlogin);
 
-        line_Nlogin = new QLineEdit(layoutWidget);
+        line_Nlogin = new QLineEdit(groupBox_2);
         line_Nlogin->setObjectName(QString::fromUtf8("line_Nlogin"));
 
         horizontalLayout->addWidget(line_Nlogin);
@@ -105,12 +86,12 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        label_Npassword = new QLabel(layoutWidget);
+        label_Npassword = new QLabel(groupBox_2);
         label_Npassword->setObjectName(QString::fromUtf8("label_Npassword"));
 
         horizontalLayout_2->addWidget(label_Npassword);
 
-        line_Npassword = new QLineEdit(layoutWidget);
+        line_Npassword = new QLineEdit(groupBox_2);
         line_Npassword->setObjectName(QString::fromUtf8("line_Npassword"));
 
         horizontalLayout_2->addWidget(line_Npassword);
@@ -118,7 +99,23 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
-        pushButton_change = new QPushButton(layoutWidget);
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        lev = new QLabel(groupBox_2);
+        lev->setObjectName(QString::fromUtf8("lev"));
+
+        horizontalLayout_3->addWidget(lev);
+
+        line_level = new QLineEdit(groupBox_2);
+        line_level->setObjectName(QString::fromUtf8("line_level"));
+
+        horizontalLayout_3->addWidget(line_level);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_3);
+
+        pushButton_change = new QPushButton(groupBox_2);
         pushButton_change->setObjectName(QString::fromUtf8("pushButton_change"));
         QFont font;
         font.setPointSize(16);
@@ -127,9 +124,64 @@ public:
 
         verticalLayout_2->addWidget(pushButton_change);
 
-        newwelc = new QLabel(change);
-        newwelc->setObjectName(QString::fromUtf8("newwelc"));
-        newwelc->setGeometry(QRect(130, 30, 131, 21));
+
+        horizontalLayout_7->addLayout(verticalLayout_2);
+
+
+        horizontalLayout_8->addWidget(groupBox_2);
+
+        groupBox = new QGroupBox(change);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        horizontalLayout_6 = new QHBoxLayout(groupBox);
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        label_2 = new QLabel(groupBox);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        horizontalLayout_5->addWidget(label_2);
+
+        del_id = new QLineEdit(groupBox);
+        del_id->setObjectName(QString::fromUtf8("del_id"));
+
+        horizontalLayout_5->addWidget(del_id);
+
+
+        verticalLayout->addLayout(horizontalLayout_5);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        label = new QLabel(groupBox);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        horizontalLayout_4->addWidget(label);
+
+        del_d = new QLineEdit(groupBox);
+        del_d->setObjectName(QString::fromUtf8("del_d"));
+
+        horizontalLayout_4->addWidget(del_d);
+
+
+        verticalLayout->addLayout(horizontalLayout_4);
+
+        del = new QPushButton(groupBox);
+        del->setObjectName(QString::fromUtf8("del"));
+
+        verticalLayout->addWidget(del);
+
+
+        horizontalLayout_6->addLayout(verticalLayout);
+
+
+        horizontalLayout_8->addWidget(groupBox);
+
 
         retranslateUi(change);
 
@@ -139,12 +191,15 @@ public:
     void retranslateUi(QDialog *change)
     {
         change->setWindowTitle(QApplication::translate("change", "change", nullptr));
-        label_blog->setText(QApplication::translate("change", "Old login", nullptr));
-        label_bpass->setText(QApplication::translate("change", "Old password", nullptr));
-        label_Nlogin->setText(QApplication::translate("change", "New login", nullptr));
-        label_Npassword->setText(QApplication::translate("change", "New password", nullptr));
-        pushButton_change->setText(QApplication::translate("change", "Change", nullptr));
-        newwelc->setText(QApplication::translate("change", "Enter new login and password", nullptr));
+        groupBox_2->setTitle(QApplication::translate("change", "Add new user", nullptr));
+        label_Nlogin->setText(QApplication::translate("change", "login", nullptr));
+        label_Npassword->setText(QApplication::translate("change", "password", nullptr));
+        lev->setText(QApplication::translate("change", "level", nullptr));
+        pushButton_change->setText(QApplication::translate("change", "Add", nullptr));
+        groupBox->setTitle(QApplication::translate("change", "Delete user", nullptr));
+        label_2->setText(QApplication::translate("change", "Row with \342\204\226:", nullptr));
+        label->setText(QApplication::translate("change", "First row containing:", nullptr));
+        del->setText(QApplication::translate("change", "delete", nullptr));
     } // retranslateUi
 
 };

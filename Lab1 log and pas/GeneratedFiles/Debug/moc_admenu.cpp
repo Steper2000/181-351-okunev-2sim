@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'change.h'
+** Meta object code from reading C++ file 'admenu.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../change.h"
+#include "../../admenu.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'change.h' doesn't include <QObject>."
+#error "The header file 'admenu.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.12.1. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,29 +20,28 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_change_t {
+struct qt_meta_stringdata_admenu_t {
     QByteArrayData data[4];
-    char stringdata0[52];
+    char stringdata0[42];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_change_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_admenu_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_change_t qt_meta_stringdata_change = {
+static const qt_meta_stringdata_admenu_t qt_meta_stringdata_admenu = {
     {
-QT_MOC_LITERAL(0, 0, 6), // "change"
-QT_MOC_LITERAL(1, 7, 28), // "on_pushButton_change_clicked"
-QT_MOC_LITERAL(2, 36, 0), // ""
-QT_MOC_LITERAL(3, 37, 14) // "on_del_clicked"
+QT_MOC_LITERAL(0, 0, 6), // "admenu"
+QT_MOC_LITERAL(1, 7, 15), // "on_show_clicked"
+QT_MOC_LITERAL(2, 23, 0), // ""
+QT_MOC_LITERAL(3, 24, 17) // "on_change_clicked"
 
     },
-    "change\0on_pushButton_change_clicked\0"
-    "\0on_del_clicked"
+    "admenu\0on_show_clicked\0\0on_change_clicked"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_change[] = {
+static const uint qt_meta_data_admenu[] = {
 
  // content:
        8,       // revision
@@ -66,46 +65,44 @@ static const uint qt_meta_data_change[] = {
        0        // eod
 };
 
-void change::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void admenu::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<change *>(_o);
+        auto *_t = static_cast<admenu *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_pushButton_change_clicked(); break;
-        case 1: _t->on_del_clicked(); break;
+        case 0: _t->on_show_clicked(); break;
+        case 1: _t->on_change_clicked(); break;
         default: ;
         }
     }
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject change::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject admenu::staticMetaObject = { {
     &QDialog::staticMetaObject,
-    qt_meta_stringdata_change.data,
-    qt_meta_data_change,
+    qt_meta_stringdata_admenu.data,
+    qt_meta_data_admenu,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *change::metaObject() const
+const QMetaObject *admenu::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *change::qt_metacast(const char *_clname)
+void *admenu::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_change.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_admenu.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "Ui::change"))
-        return static_cast< Ui::change*>(this);
     return QDialog::qt_metacast(_clname);
 }
 
-int change::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int admenu::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QDialog::qt_metacall(_c, _id, _a);
     if (_id < 0)

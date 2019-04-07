@@ -1,5 +1,8 @@
+
 #include "server.h"
+#include "classdb.h"
 #include <QDateTime>
+
 //Qtsp server конспект
 server::server(QObject *parent)
 	: QObject(parent)
@@ -18,7 +21,21 @@ server::server(QObject *parent)
 
 server::~server()
 {
-	server_status = 0;
+	if (server_status == 1)
+	{
+		//mtsoc->close();
+
+		foreach(int i, SClient.keys()) {
+			QTextStream os(SClient[i]);
+			os.setAutoDetectUnicode(true);
+			os << QDateTime::currentDateTime().toString() << "\n";
+			SClient[i]->close();
+			SClient.remove(i);
+		}
+		mtser->close();
+		qDebug() << QString::fromUtf8("server stoped");
+		server_status = 0;
+	}
 }
 
 
@@ -31,7 +48,7 @@ void server::slotNewConnection()
 		mtsoc->write("hello world");
 			connect(mtsoc, &QTcpSocket::readyRead, this, &server::slotReadClient);
 			connect(mtsoc, &QTcpSocket::disconnected, this, &server::slotClientDis);*/
-		qDebug() << QString::fromUtf8("new conection");
+		qDebug() << QString::fromUtf8("new connection");
 		QTcpSocket* clientSocket =mtser->nextPendingConnection();
 		int id = clientSocket->socketDescriptor();
 		SClient[id] = clientSocket;
@@ -42,30 +59,51 @@ void server::slotNewConnection()
 
 
 void server::slotClientDis()
-{	if (server_status == 1)
-	{
-		//mtsoc->close();
-	
-		foreach(int i, SClient.keys()) {
-			QTextStream os(SClient[i]);
-			os.setAutoDetectUnicode(true);
-			os << QDateTime::currentDateTime().toString() << "\n";
-			SClient[i]->close();
-			SClient.remove(i);
-		}
-		mtser->close();
-		qDebug() << QString::fromUtf8("server stoped");
-			server_status = 0;
-	}
+{
+	QObject * object = QObject::sender();
+	QTcpSocket * socket = static_cast<QTcpSocket *>(object);
+	socket->close();
 }
 
 void server::slotReadClient()
 {
 	QObject * object = QObject::sender(); 
 	QTcpSocket * socket = static_cast<QTcpSocket *>(object);
-	QTextStream os(socket);
-	os.setAutoDetectUnicode(true);
-	os << "\hello! you conected ";
+	//QTextStream os(socket);
+	//os.setAutoDetectUnicode(true);
+	//os << "\hello! you conected ";
+	//if (socket->bytesAvaible()>0)
+	QByteArray arr = socket->readAll();
+	QString log;// = "adm";
+	QString pass;// = "123";
+	std::string mess;
+	mess = arr.toStdString();
+	qDebug()<<QString::fromStdString(mess);
+	
+	int pos = mess.find(" ");
+	std::string func = mess.substr(0, pos);
+	mess.erase(0, pos + 1);
+	
+	pos = mess.find(" ");
+	log =QString::fromStdString(mess.substr(0, pos));
+	mess.erase(0, pos + 1);
+	
+	mess.pop_back();
+	mess.pop_back();
+	pass = QString::fromStdString(mess);
+	//mess.erase(0, pos + 1);
+qDebug() << "hello"<<autorize(log, pass);
+
+
+	/*QString qstr = socket->readAll();
+	std::string str = qstr.toStdString();
+	if (str == "autorize\r\n")
+	{
+		qstr = socket->readAll();
+		std::string strl = qstr.toStdString();
+		qstr = socket->readAll();
+		std::string strp = qstr.toStdString();
+	}*/
 }
 
 

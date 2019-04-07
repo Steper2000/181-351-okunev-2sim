@@ -5,6 +5,7 @@
 #include <QTextStream> // Подключаем класс QTextStream
 //#include < QIODevice>
 
+QString autorize(QString login, QString pass);
 
 struct datas {
 	std::string pred;
