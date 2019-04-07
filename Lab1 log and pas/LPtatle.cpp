@@ -67,7 +67,70 @@ void LPtatle::on_sort_clicked()
 			id = tabl.find(so, id);
 		}
 	}
-	
+	if(ui.ra->isChecked())
+	{
+		int j=0;
+		if(so!="")
+		{
+			while ( j < tab.baza.size())
+			{
+				if (tab.baza[j].lev != "a")
+					tab.del_data(j);
+				else j++;
+			}
+		}
+		else
+		{
+			for (int i = 0; i < tabl.baza.size(); i++)
+			{
+				if (tabl.baza[i].lev == "a")
+					tab.add_data(tabl.baza[i]);
+			}
+		}
+	}
+	if (ui.rm->isChecked())
+	{
+		int j = 0;
+		if (so != "")
+		{
+			while (j < tab.baza.size())
+			{
+				if (tab.baza[j].lev != "m")
+					tab.del_data(j);
+				else j++;
+			}
+		}
+		else
+		{
+			for (int i = 0; i < tabl.baza.size(); i++)
+			{
+				if (tabl.baza[i].lev == "m")
+					tab.add_data(tabl.baza[i]);
+			}
+		}
+	}
+	if (ui.ru->isChecked())
+	{
+		int j = 0;
+		if (so != "")
+		{
+			while (j < tab.baza.size())
+			{
+				if (tab.baza[j].lev != "u")
+					tab.del_data(j);
+				else j++;
+			}
+		}
+		else
+		{
+			for (int i = 0; i < tabl.baza.size(); i++)
+			{
+				if (tabl.baza[i].lev == "u")
+					tab.add_data(tabl.baza[i]);
+			}
+		}
+	}
+
 	for (int i = 0; i < tab.baza.size(); i++)
 	{
 

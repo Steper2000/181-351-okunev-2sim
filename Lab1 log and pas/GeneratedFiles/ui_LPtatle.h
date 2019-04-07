@@ -11,53 +11,95 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QTableView>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_LPtatle
 {
 public:
+    QVBoxLayout *verticalLayout_2;
     QTableView *tableView;
+    QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
     QLabel *label;
     QLineEdit *lineEdit;
+    QRadioButton *ra;
+    QRadioButton *rm;
+    QRadioButton *ru;
     QPushButton *sort;
-    QCheckBox *adm;
-    QCheckBox *man;
-    QCheckBox *us;
 
     void setupUi(QDialog *LPtatle)
     {
         if (LPtatle->objectName().isEmpty())
             LPtatle->setObjectName(QString::fromUtf8("LPtatle"));
-        LPtatle->resize(566, 494);
+        LPtatle->resize(574, 468);
+        verticalLayout_2 = new QVBoxLayout(LPtatle);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         tableView = new QTableView(LPtatle);
         tableView->setObjectName(QString::fromUtf8("tableView"));
-        tableView->setGeometry(QRect(10, 10, 381, 301));
+
+        verticalLayout_2->addWidget(tableView);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         label = new QLabel(LPtatle);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(20, 320, 55, 16));
+
+        horizontalLayout->addWidget(label);
+
         lineEdit = new QLineEdit(LPtatle);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(70, 320, 113, 22));
+
+        horizontalLayout->addWidget(lineEdit);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        ra = new QRadioButton(LPtatle);
+        ra->setObjectName(QString::fromUtf8("ra"));
+
+        verticalLayout->addWidget(ra);
+
+        rm = new QRadioButton(LPtatle);
+        rm->setObjectName(QString::fromUtf8("rm"));
+
+        verticalLayout->addWidget(rm);
+
+        ru = new QRadioButton(LPtatle);
+        ru->setObjectName(QString::fromUtf8("ru"));
+
+        verticalLayout->addWidget(ru);
+
+
+        horizontalLayout_2->addLayout(verticalLayout);
+
         sort = new QPushButton(LPtatle);
         sort->setObjectName(QString::fromUtf8("sort"));
-        sort->setGeometry(QRect(210, 360, 93, 28));
-        adm = new QCheckBox(LPtatle);
-        adm->setObjectName(QString::fromUtf8("adm"));
-        adm->setGeometry(QRect(100, 350, 81, 20));
-        man = new QCheckBox(LPtatle);
-        man->setObjectName(QString::fromUtf8("man"));
-        man->setGeometry(QRect(100, 370, 81, 20));
-        us = new QCheckBox(LPtatle);
-        us->setObjectName(QString::fromUtf8("us"));
-        us->setGeometry(QRect(100, 390, 81, 20));
+
+        horizontalLayout_2->addWidget(sort);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
+
 
         retranslateUi(LPtatle);
 
@@ -68,10 +110,10 @@ public:
     {
         LPtatle->setWindowTitle(QApplication::translate("LPtatle", "LPtatle", nullptr));
         label->setText(QApplication::translate("LPtatle", "Login", nullptr));
+        ra->setText(QApplication::translate("LPtatle", "Admin", nullptr));
+        rm->setText(QApplication::translate("LPtatle", "Manager", nullptr));
+        ru->setText(QApplication::translate("LPtatle", "User", nullptr));
         sort->setText(QApplication::translate("LPtatle", "Sort", nullptr));
-        adm->setText(QApplication::translate("LPtatle", "admin", nullptr));
-        man->setText(QApplication::translate("LPtatle", "manager", nullptr));
-        us->setText(QApplication::translate("LPtatle", "user", nullptr));
     } // retranslateUi
 
 };

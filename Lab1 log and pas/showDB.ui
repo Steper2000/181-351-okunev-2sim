@@ -42,7 +42,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>sort</string>
+        <string>Sort</string>
        </property>
       </widget>
      </item>

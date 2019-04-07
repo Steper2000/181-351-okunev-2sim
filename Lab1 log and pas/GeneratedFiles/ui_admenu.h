@@ -64,8 +64,8 @@ public:
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt;\">Hello admin! What do you want to do?</span></p></body></html>", nullptr));
-        show->setText(QApplication::translate("admenu", "Show log and pss table", nullptr));
-        change->setText(QApplication::translate("admenu", "Change my login and password", nullptr));
+        show->setText(QApplication::translate("admenu", "Show log and pas table", nullptr));
+        change->setText(QApplication::translate("admenu", "Change table", nullptr));
     } // retranslateUi
 
 };

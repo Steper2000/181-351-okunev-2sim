@@ -198,7 +198,7 @@ public:
         pushButton_change->setText(QApplication::translate("change", "Add", nullptr));
         groupBox->setTitle(QApplication::translate("change", "Delete user", nullptr));
         label_2->setText(QApplication::translate("change", "Row with \342\204\226:", nullptr));
-        label->setText(QApplication::translate("change", "First row containing:", nullptr));
+        label->setText(QApplication::translate("change", "User login", nullptr));
         del->setText(QApplication::translate("change", "delete", nullptr));
     } // retranslateUi
 

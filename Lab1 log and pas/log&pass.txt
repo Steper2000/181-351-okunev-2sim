@@ -6,7 +6,6 @@ user2	56	u
 Kirill	batar	m
 Danila	spulivan	a
 a	a	a
-w	w	a
 q	q	a
 admin	123	a
 a	r	u

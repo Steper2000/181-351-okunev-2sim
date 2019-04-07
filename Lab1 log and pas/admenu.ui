@@ -28,14 +28,14 @@ p, li { white-space: pre-wrap; }
    <item>
     <widget class="QPushButton" name="show">
      <property name="text">
-      <string>Show log and pss table</string>
+      <string>Show log and pas table</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="change">
      <property name="text">
-      <string>Change my login and password</string>
+      <string>Change table</string>
      </property>
     </widget>
    </item>
