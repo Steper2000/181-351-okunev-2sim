@@ -1,6 +1,8 @@
 #include "add.h"
 #include "classdb.h"
 #include <QMessageBox>
+// надо там же где и таблица
+//
 add::add(QWidget *parent)
 	: QDialog(parent)
 {

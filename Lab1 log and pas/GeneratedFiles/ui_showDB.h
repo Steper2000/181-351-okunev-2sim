@@ -172,7 +172,7 @@ public:
     {
         showDB->setWindowTitle(QApplication::translate("showDB", "showDB", nullptr));
         label_5->setText(QApplication::translate("showDB", "Company", nullptr));
-        sort->setText(QApplication::translate("showDB", "sort", nullptr));
+        sort->setText(QApplication::translate("showDB", "Sort", nullptr));
         delsor->setText(QApplication::translate("showDB", "Delete Sort", nullptr));
         label->setText(QApplication::translate("showDB", "Industry", nullptr));
         label_2->setText(QApplication::translate("showDB", "Date", nullptr));

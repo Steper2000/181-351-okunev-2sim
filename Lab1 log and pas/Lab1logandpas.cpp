@@ -7,14 +7,54 @@
 #include "showDB.h"
 #include "admenu.h"
 #include "LPbase.h"
+
 //#include <fstream>
 
 Lab1logandpas::Lab1logandpas(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+	saske = new QTcpSocket(this);
+	saske->connectToHost("127.0.0.1", 33333);
+	connect(saske, SIGNAL(connected()), SLOT(slot_connected()));
+	connect(saske, SIGNAL(readyRead()), SLOT(slot_ready_read()));
+
 }
 
+void Lab1logandpas::slot_connected()
+{
+	QMessageBox msgBox;
+	msgBox.setText("Hello! You are on the server");
+    msgBox.exec();
+}
+
+void Lab1logandpas::slot_ready_read()
+{
+	QByteArray arr;
+	std::string mess;
+	
+	while (saske->bytesAvailable() > 0)
+	{
+		arr = saske->readAll();
+		mess = arr.toStdString();
+	}
+	QMessageBox m;
+	m.setText(QString::fromStdString(mess));
+	m.exec();
+	
+}
+
+void Lab1logandpas::slot_send_to_server(QString mess)
+{
+	QByteArray arr;
+	arr.append(mess);
+	saske->write(arr);
+}
+
+void Lab1logandpas::slot_disconected()
+{
+
+}
 
 int autorise(QString login, QString password)
 {
@@ -84,7 +124,9 @@ void Lab1logandpas::on_pushButton_autorise_clicked()
 	QString login = ui.line_login->text();
 	QString password = ui.line_password->text();
 	QMessageBox msgBox;
-	
+	QString message;
+	message = "a " + login + " " + password;
+	slot_send_to_server(message);
 	if (autorise(login, password) == 2)
 	{
 		admenu m;
@@ -165,7 +207,7 @@ void Lab1logandpas::on_Ftest_clicked()
 	da.otr = "rap";
 	da.sum = "1000";
 	datas das;
-	das.pred = "hesus";
+	das.pred = "Jesus";
 	das.date = "7.01.2000";
 	das.nal = "indulg";
 	das.otr = "god";

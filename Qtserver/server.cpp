@@ -88,8 +88,8 @@ void server::slotReadClient()
 	log =QString::fromStdString(mess.substr(0, pos));
 	mess.erase(0, pos + 1);
 	
-	mess.pop_back();
-	mess.pop_back();
+	//mess.pop_back();
+	//mess.pop_back();
 	pass = QString::fromStdString(mess);
 	//mess.erase(0, pos + 1);
 qDebug() << "hello"<<autorize(log, pass);
