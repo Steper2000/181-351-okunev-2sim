@@ -14,6 +14,7 @@ Lab1logandpas::Lab1logandpas(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+
 	saske = new QTcpSocket(this);
 	saske->connectToHost("127.0.0.1", 33333);
 	connect(saske, SIGNAL(connected()), SLOT(slot_connected()));
@@ -38,10 +39,52 @@ void Lab1logandpas::slot_ready_read()
 		arr = saske->readAll();
 		mess = arr.toStdString();
 	}
-	QMessageBox m;
+	/*QMessageBox m;
 	m.setText(QString::fromStdString(mess));
-	m.exec();
+	m.exec();*/
 	
+	if (mess == "admin")
+	{
+		admenu m;
+		m.setModal(true);
+		m.exec();
+		//msgBox.setText("Hello, admin " + login);
+		//msgBox.exec();
+	}
+	else
+	{
+		//	std::string sl = login.toStdString(); //копирует логин
+			//	std::string sll; // первые 7 символов логина
+			//	sll.insert(0, sl, 0, 7);
+			//	if (sll == "manager")
+		if (mess == "manager")
+		{
+			menu m;
+			m.setModal(true);
+			m.exec();
+			//msgBox.setText("Hello manager!");
+		   // msgBox.exec();
+		}
+		else
+		{
+			if (mess == "user")
+			{//msgBox.setText("Hello "+login+"!");
+			//msgBox.exec();
+				showDB m;
+				m.setModal(true);
+				m.exec();
+			}
+			else
+			{
+				QMessageBox msgBox;
+				msgBox.setText("Wrong login or password");
+				msgBox.setInformativeText("Again?");
+				msgBox.setStandardButtons(QMessageBox::Retry | QMessageBox::Close);
+				msgBox.setDefaultButton(QMessageBox::Save);
+				msgBox.exec();
+			}
+		}
+	}
 }
 
 void Lab1logandpas::slot_send_to_server(QString mess)
@@ -56,6 +99,7 @@ void Lab1logandpas::slot_disconected()
 
 }
 
+/*
 int autorise(QString login, QString password)
 {
 	if (login == "" || password == "") {
@@ -111,13 +155,14 @@ int autorise(QString login, QString password)
 		{
 			return 0;
 			break;
-		}*/
+		}
 		sl.clear();
 		sp.clear();
 	}
 	//base.close();
 	fclose(base);
 }
+*/
 
 void Lab1logandpas::on_pushButton_autorise_clicked()
 {
@@ -125,9 +170,11 @@ void Lab1logandpas::on_pushButton_autorise_clicked()
 	QString password = ui.line_password->text();
 	QMessageBox msgBox;
 	QString message;
-	message = "a " + login + " " + password;
+	message = "autorize " + login + " " + password;
 	slot_send_to_server(message);
-	if (autorise(login, password) == 2)
+
+	/*
+	if (autorize(login, password) == "admin")
 	{
 		admenu m;
 		m.setModal(true);
@@ -141,7 +188,7 @@ void Lab1logandpas::on_pushButton_autorise_clicked()
 		//	std::string sll; // первые 7 символов логина
 		//	sll.insert(0, sl, 0, 7);
 		//	if (sll == "manager")
-		if (autorise(login, password) == 3)
+		if (autorize(login, password) == "manager")
 		{
 				menu m;
 			m.setModal(true);
@@ -151,7 +198,7 @@ void Lab1logandpas::on_pushButton_autorise_clicked()
 		}
 	    else
 		{
-			if (autorise(login, password) == 4)
+			if (autorize(login, password) == "user")
 			{//msgBox.setText("Hello "+login+"!");
 			//msgBox.exec();
 				showDB m;

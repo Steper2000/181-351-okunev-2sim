@@ -16,8 +16,8 @@ class LPbase //:public DataBase
 private: std::string s;
 public:
 	std::vector <lopal> baza;
-	LPbase();
-	~LPbase();
+	LPbase() {};
+	~LPbase() {};
 	bool download(std::string & s);
 	void download()//загружаем данные из файла в vector
 	{
@@ -32,6 +32,7 @@ public:
 	int find(std::string data2find);
 	int find(std::string data2find, int e);//найти id
 	bool write2file();
+	QString retrans();
 
 };
 

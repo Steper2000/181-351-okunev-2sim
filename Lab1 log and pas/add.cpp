@@ -1,5 +1,4 @@
 #include "add.h"
-#include "classdb.h"
 #include <QMessageBox>
 // надо там же где и таблица
 //
@@ -7,6 +6,11 @@ add::add(QWidget *parent)
 	: QDialog(parent)
 {
 	ui.setupUi(this);
+	saske = new QTcpSocket(this);
+	saske->connectToHost("127.0.0.1", 33333);
+	connect(saske, SIGNAL(connected()), SLOT(slot_connected()));
+	connect(saske, SIGNAL(readyRead()), SLOT(slot_ready_read()));
+	slot_send_to_server("Nolog");
 }
 
 add::~add()
@@ -16,7 +20,7 @@ add::~add()
 void add::on_pushButton_del_clicked()//сомнительное, но чётко работающее удаление
 {
 	datas da;
-	DataBase db;
+	//DataBase db;
 	QString a = ui.ld1->text();
 	if (a!="")
 	{
@@ -29,11 +33,12 @@ void add::on_pushButton_del_clicked()//сомнительное, но чётко работающее удалени
 		else 
 		{
 			int id = a.toInt();
-			db.download();
-			db.del_data(id);
-			db.write2file();
+			//db.download();
+			base.del_data(id);
+			//db.write2file();
+			slot_send_to_server("changeDB " + base.retrans());
 			QMessageBox m;
-			m.setText("Data deleted");
+			m.setText("Data deleted from server");
 			m.exec();
 		}
 	}
@@ -41,11 +46,12 @@ void add::on_pushButton_del_clicked()//сомнительное, но чётко работающее удалени
 	{
 		a = ui.ld2->text();
 		if (a != "") {
-			db.download();
-			db.del_data(db.find(a.toStdString()));
-			db.write2file();
+			//db.download();
+			base.del_data(base.find(a.toStdString()));
+			//db.write2file();
+			slot_send_to_server("changeDB " + base.retrans());
 				QMessageBox m;
-				m.setText("Data deleted");
+				m.setText("Data deleted from server");
 				m.exec();
 			
 		}
@@ -70,14 +76,16 @@ void add::on_pushButton_add_clicked() //добавляет чётко
 	da.nal = d.toStdString();
 	QString e = ui.ls->text();
 	da.sum = e.toStdString();
-	DataBase db;
-	db.download();
+	//DataBase db;
+	//db.download();
 	//db.add_data(da);
-	if (db.add_data(da)) 
+	if (base.add_data(da)) 
 	{
-		db.write2file();
+		//base.write2file();
+		
+		slot_send_to_server("changeDB "+base.retrans());
 		QMessageBox m;
-		m.setText("Data added");
+		m.setText("Data sent on the server");
 		m.exec();
 	}
 	else{ QMessageBox m;

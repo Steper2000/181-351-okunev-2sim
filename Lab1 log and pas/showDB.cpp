@@ -5,6 +5,13 @@ showDB::showDB(QWidget *parent)
 {
 	ui.setupUi(this);
 	
+	saske = new QTcpSocket(this);
+	saske->connectToHost("127.0.0.1", 33333);
+	connect(saske, SIGNAL(connected()), SLOT(slot_connected()));
+	connect(saske, SIGNAL(readyRead()), SLOT(slot_ready_read()));
+	slot_send_to_server("Nolog");
+
+	/*
 	model = new QStandardItemModel;
 	QStandardItem *item;
 
@@ -47,38 +54,11 @@ showDB::showDB(QWidget *parent)
 	}
 	
 	
-	/*
-	//Первый ряд
-	item = new QStandardItem(QString("0"));
-	model->setItem(0, 0, item);
-
-	item = new QStandardItem(QString("1"));
-	model->setItem(0, 1, item);
-
-	item = new QStandardItem(QString("2"));
-	model->setItem(0, 2, item);
-
-	item = new QStandardItem(QString("3"));
-	model->setItem(0, 3, item);
-	
-	
-	//Второй ряд
-	item = new QStandardItem(QString("4"));
-	model->setItem(1, 0, item);
-
-	item = new QStandardItem(QString("5"));
-	model->setItem(1, 1, item);
-
-	item = new QStandardItem(QString("6"));
-	model->setItem(1, 2, item);
-
-	item = new QStandardItem(QString("7"));
-	model->setItem(1, 3, item);
-	*/
 	ui.tableView->setModel(model);
 
 	ui.tableView->resizeRowsToContents();
 	ui.tableView->resizeColumnsToContents();
+	*/
 }
 
 showDB::~showDB()
@@ -202,16 +182,11 @@ void showDB::on_delsor_clicked()
 	horizontalHeader.append("Tax");
 	horizontalHeader.append("Sum");
 
-	//Заголовки строк
-	//QStringList verticalHeader;
-	//verticalHeader.append("Ряд 1");
-	//verticalHeader.append("Ряд 2");
-
 	model->setHorizontalHeaderLabels(horizontalHeader);
-	//model->setVerticalHeaderLabels(verticalHeader);
+	
 
-	DataBase eshkere;
-	eshkere.download();
+	//DataBase eshkere;
+	//eshkere.download();
 
 	for (int i = 1; i < eshkere.db.size(); i++)
 	{
@@ -233,7 +208,6 @@ void showDB::on_delsor_clicked()
 	}
 
 	ui.tableView->setModel(model);
-
 	ui.tableView->resizeRowsToContents();
 	ui.tableView->resizeColumnsToContents();
 }
@@ -249,8 +223,8 @@ void showDB::on_sort_clicked()
 	horizontalHeader.append("Tax");
 	horizontalHeader.append("Sum");
 	model->setHorizontalHeaderLabels(horizontalHeader);
-	DataBase eshkere, tab;
-	eshkere.download();
+	DataBase tab;
+	//eshkere.download();
 	QString sor= ui.lineEdit->text();
 	std::string so = sor.toStdString();
 	int id;

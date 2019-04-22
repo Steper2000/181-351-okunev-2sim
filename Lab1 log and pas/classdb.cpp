@@ -89,7 +89,7 @@ void DataBase::transformStr2BD(std::string sdb)// чётко
 
 bool DataBase::del_data(int id)//белиссимо
 {
-	if(id==-1)//////опасное место.........................................................................................................................
+	if (id == -1 || id >= db.size())//////опасное место.........................................................................................................................
 	return false;
 	db.erase(db.begin() + id);
 	return true;
@@ -146,8 +146,70 @@ bool DataBase::write2file()//блестяще
 	return true;
 }
 
-QString autorize(QString login, QString pass)
+QString autorize(QString login, QString password)
 {
+	
+	if (login == "" || password == "") {
+		return "error";
+	}
+	FILE *base;
+	base = fopen("log&pass.txt", "r");
+	//std::ifstream base;
+	//base.open("database.txt");
+	QString sl;
+	QString sp;
+	//char sd;
+	char i = fgetc(base);
+	while (true)
+	{
+		//base.getline(sl, 20, ' ');
+		//base.getline(sp, 20, '\n');
+		while (i != '\t')
+		{
+			sl = sl + i;
+			if (i == '\n')
+				sl.clear();
+			i = fgetc(base);
+			if (i == -1)
+			{
+				return "error";
+				//break;
+			}
+		}
+
+		i = fgetc(base);
+
+		while (i != '\t')
+		{
+			sp = sp + i;
+			i = fgetc(base);
+		}
+
+		i = fgetc(base);
+
+		if (login == sl && password == sp)
+		{
+			if (i == 'a')
+				return "admin";
+			if (i == 'm')
+				return "manager";
+			if (i == 'u')
+				return "user";
+			//break;
+		}
+		/*
+		if (sl=="\n")
+		{
+			return 0;
+			break;
+		}*/
+		sl.clear();
+		sp.clear();
+	}
+	//base.close();
+	fclose(base);
+	
+	/*
 	if (login == "adm" && pass == "123")
 		return "admin";
 	else 
@@ -160,8 +222,7 @@ QString autorize(QString login, QString pass)
 			return "user";
 			else return "error";
 		}
-	}
-	
+	}*/
 }
 
 bool checkPred(std::string pred)
@@ -323,4 +384,17 @@ bool checkSum(std::string sum)//work clear
 			return false;
 	}
 	return true;
+}
+
+QString DataBase::retrans()
+{
+	int i = 0;
+	sdb.clear();
+	while (i < db.size())
+	{
+		sdb += db[i].pred + "\t" + db[i].otr + "\t" + db[i].date + "\t" + db[i].nal + "\t" + db[i].sum + "\n";
+		i++;
+	}
+	QString str = str.fromStdString(sdb);
+	return str;
 }

@@ -1,6 +1,7 @@
 
 #include "server.h"
 #include "classdb.h"
+#include "LPbase.h"
 #include <QDateTime>
 
 //Qtsp server конспект
@@ -74,8 +75,7 @@ void server::slotReadClient()
 	//os << "\hello! you conected ";
 	//if (socket->bytesAvaible()>0)
 	QByteArray arr = socket->readAll();
-	QString log;// = "adm";
-	QString pass;// = "123";
+	
 	std::string mess;
 	mess = arr.toStdString();
 	qDebug()<<QString::fromStdString(mess);
@@ -84,17 +84,59 @@ void server::slotReadClient()
 	std::string func = mess.substr(0, pos);
 	mess.erase(0, pos + 1);
 	
-	pos = mess.find(" ");
-	log =QString::fromStdString(mess.substr(0, pos));
-	mess.erase(0, pos + 1);
+	if (func == "autorize") 
+	{
+		QString log;
+		QString pass;
+		pos = mess.find(" ");
+		log = QString::fromStdString(mess.substr(0, pos));
+		mess.erase(0, pos + 1);
+
+		//mess.pop_back();
+		//mess.pop_back();
+		pass = QString::fromStdString(mess);
+		//mess.erase(0, pos + 1);
+		qDebug() << "hello" << autorize(log, pass);
+		slotSendToCLient(autorize(log, pass));
+	}
 	
-	//mess.pop_back();
-	//mess.pop_back();
-	pass = QString::fromStdString(mess);
-	//mess.erase(0, pos + 1);
-qDebug() << "hello"<<autorize(log, pass);
+	if (func=="LPtable")
+	{
+		std::string a;
+		LPbase f;
+		f.download(a);
+		slotSendToCLient(QString::fromStdString(a));
+	}
+	
+	if (func == "changeLP")
+	{
+		QString db= QString::fromStdString(mess);
+		QFile fout("log&pass.txt");
+		fout.open(QIODevice::WriteOnly | QIODevice::Text);
+		QTextStream writeStream(&fout);
+		writeStream << db;
+		fout.close();
+		qDebug() << "DB log&pass was updated";
+	}
 
+	if (func == "Nolog")
+	{
+		std::string a;
+		DataBase f;
+		f.download(a);
+		slotSendToCLient(QString::fromStdString(a));
+	}
 
+	if (func == "changeDB")
+	{
+		QString db = QString::fromStdString(mess);
+		QFile fout("database.txt");
+		fout.open(QIODevice::WriteOnly | QIODevice::Text);
+		QTextStream writeStream(&fout);
+		writeStream << db;
+		fout.close();
+		qDebug() << "DB database was updated";
+	}
 	/*QString qstr = socket->readAll();
 	std::string str = qstr.toStdString();
 	if (str == "autorize\r\n")
@@ -104,6 +146,15 @@ qDebug() << "hello"<<autorize(log, pass);
 		qstr = socket->readAll();
 		std::string strp = qstr.toStdString();
 	}*/
+}
+
+void server::slotSendToCLient(QString mess)
+{
+	QObject * object = QObject::sender();
+	QTcpSocket * socket = static_cast<QTcpSocket *>(object);
+	QByteArray arr;
+	arr.append(mess);
+	socket->write(arr);
 }
 
 

@@ -9,7 +9,7 @@ class Lab1logandpas : public QMainWindow
 
 public:
 	Lab1logandpas(QWidget *parent = Q_NULLPTR);
-
+	
 private:
 	Ui::Lab1logandpasClass ui;
 	QTcpSocket *saske;

@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lab1 log and pas", "Lab1 lo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Qtserver", "Qtserver\Qtserver.vcxproj", "{331663FC-9BE7-4425-A048-ABD196A85C31}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "baza-test", "baza-test\baza-test.vcxproj", "{7DC395EC-5BCD-4091-9785-F220BD00A8FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -27,6 +29,12 @@ Global
 		{331663FC-9BE7-4425-A048-ABD196A85C31}.Release|x64.ActiveCfg = Release|x64
 		{331663FC-9BE7-4425-A048-ABD196A85C31}.Release|x64.Build.0 = Release|x64
 		{331663FC-9BE7-4425-A048-ABD196A85C31}.Release|x86.ActiveCfg = Release|x64
+		{7DC395EC-5BCD-4091-9785-F220BD00A8FB}.Debug|x64.ActiveCfg = Debug|x64
+		{7DC395EC-5BCD-4091-9785-F220BD00A8FB}.Debug|x64.Build.0 = Debug|x64
+		{7DC395EC-5BCD-4091-9785-F220BD00A8FB}.Debug|x86.ActiveCfg = Debug|x64
+		{7DC395EC-5BCD-4091-9785-F220BD00A8FB}.Release|x64.ActiveCfg = Release|x64
+		{7DC395EC-5BCD-4091-9785-F220BD00A8FB}.Release|x64.Build.0 = Release|x64
+		{7DC395EC-5BCD-4091-9785-F220BD00A8FB}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

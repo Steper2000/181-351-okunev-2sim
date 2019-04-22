@@ -56,7 +56,7 @@ public:
 //	}
 
 	bool write2file();
-
+	QString retrans();
 private:
 	std::string sdb;
 	//std::vector<datas> db; //* тут было

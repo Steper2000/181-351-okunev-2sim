@@ -1,6 +1,6 @@
 #include "LPbase.h"
-
-
+//#include "Lab1logandpas.h"
+/*
 LPbase::LPbase()
 {
 }
@@ -8,7 +8,7 @@ LPbase::LPbase()
 LPbase::~LPbase()
 {
 }
-
+*/
 bool LPbase::add_data(lopal l)
 {
 	if (l.lev != "a")
@@ -25,6 +25,7 @@ bool LPbase::add_data(lopal l)
 
 bool LPbase::download(std::string & s)
 {
+	
 	QFile fin("log&pass.txt");
 	fin.open(QIODevice::ReadOnly | QIODevice::Text);
 	if (!fin.isOpen())
@@ -34,6 +35,7 @@ bool LPbase::download(std::string & s)
 	s = fin.readAll();
 	fin.close();
 	return true;
+	//*/
 }
 
 void LPbase::trans(std::string e)
@@ -131,6 +133,18 @@ bool LPbase::write2file()//блестяще
 	writeStream << str;
 	fout.close();
 	return true;
+}
+
+QString LPbase::retrans()
+{
+	int i = 0;
+	while (i < baza.size())
+	{
+		s += baza[i].log + "\t" + baza[i].pas + "\t" + baza[i].lev + "\n";
+		i++;
+	}
+	QString str = str.fromStdString(s);
+	return str;
 }
 
 

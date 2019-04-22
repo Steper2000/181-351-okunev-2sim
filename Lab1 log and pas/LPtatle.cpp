@@ -3,10 +3,20 @@
 LPtatle::LPtatle(QWidget *parent)
 	: QDialog(parent)
 {
+	
+	saske = new QTcpSocket(this);
+	saske->connectToHost("127.0.0.1", 33333);
+	connect(saske, SIGNAL(connected()), SLOT(slot_connected()));
+	connect(saske, SIGNAL(readyRead()), SLOT(slot_ready_read()));
+	slot_send_to_server("LPtable");
+
+
+
+/*
 	ui.setupUi(this);
 	model = new QStandardItemModel;
 	QStandardItem *item;
-
+	
 	//Заголовки столбцов
 	QStringList horizontalHeader;
 	horizontalHeader.append("Login");
@@ -31,6 +41,7 @@ LPtatle::LPtatle(QWidget *parent)
 	ui.tableView->setModel(model);
 	ui.tableView->resizeRowsToContents();
 	ui.tableView->resizeColumnsToContents();
+	*/
 }
 
 LPtatle::~LPtatle()
@@ -46,8 +57,9 @@ void LPtatle::on_sort_clicked()
 	horizontalHeader.append("Password");
 	horizontalHeader.append("Level");
 	model->setHorizontalHeaderLabels(horizontalHeader);
-	LPbase tabl, tab;
-	tabl.download();
+//LPbase tabl, tab;
+	//tabl.download();
+	LPbase tab;
 	QString sor = ui.lineEdit->text();
 	std::string so = sor.toStdString();
 	int id;

@@ -2,14 +2,21 @@
 #include <QFile>
 #include <string>
 #include <fstream>
-#include "LPbase.h"
+
 #include <QMessageBox>
+
 //#include "classdb.h"
 //#include "Lab1logandpas.h"
 change::change(QWidget *parent)
 	: QDialog(parent)
 {
 	ui.setupUi(this);
+	
+	saske = new QTcpSocket(this);
+	saske->connectToHost("127.0.0.1", 33333);
+	connect(saske, SIGNAL(connected()), SLOT(slot_connected()));
+	connect(saske, SIGNAL(readyRead()), SLOT(slot_ready_read()));
+	slot_send_to_server("LPtable");
 }
 change::~change()
 {
@@ -78,13 +85,13 @@ public:
 void change::on_del_clicked()
 {
 	lopal da;
-	LPbase db;
+//	LPbase db;
 	QString a = ui.del_id->text();
 	if (a != "")
 	{
 		int id = a.toInt();
-		db.download();
-		if (id <1 || id>db.baza.size())
+		//base.download();
+		if (id <1 || id>base.baza.size())
 		{
 			QMessageBox m;
 			m.setText("Wrong number of the row");
@@ -93,10 +100,11 @@ void change::on_del_clicked()
 		else
 		{
 			
-			db.del_data(id-1);
-			db.write2file();
+			base.del_data(id-1);
+			//base.write2file();
+			slot_send_to_server("changeLP "+base.retrans());
 			QMessageBox m;
-			m.setText("User deleted");
+			m.setText("User deleted on server");
 			m.exec();
 		}
 	}
@@ -104,10 +112,11 @@ void change::on_del_clicked()
 	{
 		a = ui.del_d->text();
 		if (a != "") {
-			db.download();
-			if (db.del_data(db.find(a.toStdString())))
+			//base.download();
+			if (base.del_data(base.find(a.toStdString())))
 			{
-				db.write2file();
+				//db.write2file();
+				slot_send_to_server("changeLP " + base.retrans());
 				QMessageBox m;
 				m.setText("User deleted");
 				m.exec();
@@ -136,13 +145,14 @@ void change::on_pushButton_change_clicked()
 	lol.pas = b.toStdString();
 	QString c = ui.line_level->text();
 	lol.lev = c.toStdString();
-	LPbase lpb;
-	lpb.download();
-	if (lpb.add_data(lol))
+	//LPbase lpb;
+	//base.download();
+	if (base.add_data(lol))
 	{
-		lpb.write2file();
+		//base.write2file();
+		slot_send_to_server("changeLP "+base.retrans());
 		QMessageBox m;
-		m.setText("User added");
+		m.setText("User data sent on the server");
 		m.exec();
 	}
 	else {

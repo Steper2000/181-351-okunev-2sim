@@ -1,0 +1,11 @@
+manager	321	m
+manager2	222	m
+manager_Stependii	f	m
+user	45	u
+Kirill	batar	m
+Danila	spulivan	a
+a	a	a
+q	q	a
+admin	123	a
+a	r	u
+w	w	m

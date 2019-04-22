@@ -21,6 +21,7 @@ public slots:
 	void slotClientDis();//выход
 	//void slotServerRead();// чтение
 	void slotReadClient();
+	void slotSendToCLient(QString mess);
 
 private:
 	QTcpServer * mtser;
