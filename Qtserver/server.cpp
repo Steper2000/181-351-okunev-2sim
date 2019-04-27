@@ -107,7 +107,7 @@ void server::slotReadClient()
 		slotSendToCLient(QString::fromStdString(a));
 	}
 	
-	if (func == "changeLP")
+	if (func == "add")
 	{
 		
 		pos = mess.find(" ");
@@ -144,6 +144,34 @@ void server::slotReadClient()
 		fout.close();
 		*/
 		qDebug() << "DB log&pass was updated";
+	}
+
+	if (func == "delete")
+	{
+
+		QString log = QString::fromStdString(mess);
+
+		QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+		db.setDatabaseName("Test");
+
+		if (!db.open())
+			qDebug() << db.lastError().text();
+		else
+			qDebug() << "LP base opened";
+
+		QSqlQuery query(db);
+		query.prepare("DELETE FROM User WHERE login = :login");
+		query.bindValue(":login", log);
+		//query.bindValue(":password", pas);
+		//query.bindValue(":access", ac);
+		query.exec();//выполнить
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
+
+		qDebug() << "user " <<log <<" deleted";
 	}
 
 	if (func == "Nolog")

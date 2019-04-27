@@ -84,11 +84,18 @@ public:
 
 void change::on_del_clicked()
 {
+
+	
 	lopal da;
 //	LPbase db;
 	QString a = ui.del_id->text();
 	if (a != "")
 	{
+		slot_send_to_server("delete# " + a);
+		QMessageBox m;
+		m.setText("User deleted on server");
+		m.exec();
+		/*
 		int id = a.toInt();
 		//base.download();
 		if (id <1 || id>base.baza.size())
@@ -106,12 +113,22 @@ void change::on_del_clicked()
 			QMessageBox m;
 			m.setText("User deleted on server");
 			m.exec();
-		}
+		}*/
 	}
 	else
 	{
 		a = ui.del_d->text();
-		if (a != "") {
+		if (a != "") 
+		{
+			slot_send_to_server("delete " + a);
+		}
+		else {
+			QMessageBox m;
+			m.setText("Nothing wasn't added for delete");
+			m.exec();
+		}
+			
+		/*if (a != "") {
 			//base.download();
 			if (base.del_data(base.find(a.toStdString())))
 			{
@@ -132,8 +149,9 @@ void change::on_del_clicked()
 			QMessageBox m;
 			m.setText("Nothing wasn't added for delete");
 			m.exec();
-		}
+		}*/
 	}
+	
 }
 
 void change::on_pushButton_change_clicked()
@@ -147,8 +165,19 @@ void change::on_pushButton_change_clicked()
 	lol.lev = c.toStdString();
 	//LPbase lpb;
 	//base.download();
-	slot_send_to_server("changeLP "  + a +' '+  b + ' ' + c)
-	
+	if (c=="a"||c=="m"||c=="u")
+	{
+	slot_send_to_server("add " + a + ' ' + b + ' ' + c);
+	QMessageBox m;
+	m.setText("User data sent on the server");
+	m.exec();
+	}
+	else
+	{
+		QMessageBox m;
+		m.setText("User don't add! Wrong level");
+		m.exec();
+	}
 	/*
 	if (base.add_data(lol))
 	{
