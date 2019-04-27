@@ -3,6 +3,12 @@
 #include <string>
 #include <cctype>   // для функции isdigit
 #include <cstdlib>  // для функции atoi
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlRecord>
+#include <QVariant>
+#include <QDebug>
 bool DataBase::add_data(datas tempData)//чётко
 {
 	//download(sdb);
@@ -146,9 +152,106 @@ bool DataBase::write2file()//блестяще
 	return true;
 }
 
+
+
 QString autorize(QString login, QString password)
 {
+
+	if (login == "" || password == "") {
+		return "error";
+	}
+
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+	db.setDatabaseName("C:/181-351-okunev/181-351-Okunev-2sim/Qtserver/Test");
 	
+	if (!db.open())
+		qDebug() << db.lastError().text();
+	else
+		qDebug() << "LP base opened";
+	//qDebug() << db.tables();
+
+	QSqlQuery query(db);
+	query.prepare("SELECT access FROM 'User' where login = :login  and password = :password ");
+	query.bindValue(":login", login);
+	query.bindValue(":password", password);
+	query.exec();
+
+
+	
+	if (!query.isActive())
+	{
+		//ошибка
+		qDebug() << query.lastError().text();
+	}
+	
+	/*
+	query.exec("CREATE TABLE nologi("
+		"company VARCHAR (20) NOT NULL, "
+		"industry VARCHAR (20) NOT NULL,"
+		"date VARCHAR (20) NOT NULL,"
+		"tax VARCHAR(20) NOT NULL,"
+		"sum INT(10) NOT NULL)"
+				);
+	*/
+	/*
+	query.prepare("INSERT INTO nologi(company, industry, date, tax, sum) VALUES(:company, :industry, :date, :tax, :sum)");
+	query.bindValue(":company", "hate sql");
+	query.bindValue(":industry", "rap");
+	query.bindValue(":date", "11.11.1111");
+	query.bindValue(":tax", "w");
+	query.bindValue(":sum", "1005");
+	query.exec();//выполнить
+	
+	if (!query.isActive())
+	{
+		//ошибка
+		qDebug() << query.lastError().text();
+	}
+	
+	query.exec("SELECT * FROM nologi");
+
+	// вывести на экран
+	QSqlRecord rec = query.record();
+	const int loginIndex = rec.indexOf("company"); //номер "столбца"
+	const int passwordIndex = rec.indexOf("industry");
+	const int accessIndex = rec.indexOf("date");
+	const int aaccessIndex = rec.indexOf("tax");
+	const int aaaccessIndex = rec.indexOf("sum");
+	
+	while (query.next())
+	{
+		qDebug() << query.value(loginIndex) << "\t" << query.value(passwordIndex) << "\t" << query.value(accessIndex) << "\t" << query.value(aaccessIndex) << "\t" << query.value(aaaccessIndex);
+	}
+	*/
+	//QSqlRecord rec = query.record();
+	//const int accessIndex = rec.indexOf("access");
+	
+	
+		QString a;
+
+		
+		
+		if (query.next())
+		{
+			a = query.value(0).toString();
+			db.close();
+			
+			if (a == 'a')
+				return "admin";
+			if (a == 'm')
+				return "manager";
+			if (a == 'u')
+				return "user";
+			
+			
+			//return a;
+		}
+	
+	db.close();
+	return "error";
+	//*/
+	
+	/* 
 	if (login == "" || password == "") {
 		return "error";
 	}
@@ -197,12 +300,7 @@ QString autorize(QString login, QString password)
 				return "user";
 			//break;
 		}
-		/*
-		if (sl=="\n")
-		{
-			return 0;
-			break;
-		}*/
+
 		sl.clear();
 		sp.clear();
 	}
@@ -223,6 +321,7 @@ QString autorize(QString login, QString password)
 			else return "error";
 		}
 	}*/
+	
 }
 
 bool checkPred(std::string pred)

@@ -3,6 +3,14 @@
 #include <QObject>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include "classdb.h"
+#include "LPbase.h"
+#include <QDateTime>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlRecord>
+#include <QVariant>
 
 /*
 #include <QtNetwork>
@@ -28,4 +36,6 @@ private:
 	//QTcpSocket * mtsoc;
 	int server_status;
 	QMap<int,QTcpSocket *> SClient;
+	//QSqlDatabase db;
+	//QSqlQuery query(db);
 };

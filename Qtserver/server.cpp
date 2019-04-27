@@ -1,9 +1,6 @@
 
 #include "server.h"
-#include "classdb.h"
-#include "LPbase.h"
-#include <QDateTime>
-
+#include <QDebug>
 //Qtsp server конспект
 server::server(QObject *parent)
 	: QObject(parent)
@@ -18,6 +15,8 @@ server::server(QObject *parent)
 		server_status = 1;
 		qDebug() << "server is started";
 	}
+
+
 }
 
 server::~server()

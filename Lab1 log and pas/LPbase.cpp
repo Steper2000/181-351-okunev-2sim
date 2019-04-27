@@ -1,4 +1,10 @@
 #include "LPbase.h"
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlRecord>
+#include <QVariant>
+#include <QDebug>
 //#include "Lab1logandpas.h"
 /*
 LPbase::LPbase()
@@ -25,7 +31,24 @@ bool LPbase::add_data(lopal l)
 
 bool LPbase::download(std::string & s)
 {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+	db.setDatabaseName("Test");
+
+	if (!db.open())
+		qDebug() << db.lastError().text();
+	else
+		qDebug() << "LP base opened";
+
+	QSqlQuery query(db);
+	query.exec("SELECT * FROM 'User' ");
 	
+	QString sendmes;
+
+	while (query.next())
+	{
+		 sendmes+=query.value(0).toString + "\t" << query.value(1) << "\t" << query.value(2);
+	}
+	/*
 	QFile fin("log&pass.txt");
 	fin.open(QIODevice::ReadOnly | QIODevice::Text);
 	if (!fin.isOpen())
@@ -35,7 +58,7 @@ bool LPbase::download(std::string & s)
 	s = fin.readAll();
 	fin.close();
 	return true;
-	//*/
+	*/
 }
 
 void LPbase::trans(std::string e)
