@@ -109,12 +109,40 @@ void server::slotReadClient()
 	
 	if (func == "changeLP")
 	{
+		
+		pos = mess.find(" ");
+		QString log = QString::fromStdString(mess.substr(0, pos));
+		mess.erase(0, pos + 1);
+
+		pos = mess.find(" ");
+		QString pas = QString::fromStdString(mess.substr(0, pos));
+		mess.erase(0, pos + 1);
+
+		QString ac= QString::fromStdString(mess);
+		
+		QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+		db.setDatabaseName("Test");
+
+		if (!db.open())
+			qDebug() << db.lastError().text();
+		else
+			qDebug() << "LP base opened";
+
+		QSqlQuery query(db);
+		query.prepare("INSERT INTO User(login, password, access) VALUES(:login, :password, :access)");
+		query.bindValue(":login", log);
+		query.bindValue(":password", pas);
+		query.bindValue(":access", ac);
+		query.exec();//выполнить
+
+		/*
 		QString db= QString::fromStdString(mess);
 		QFile fout("log&pass.txt");
 		fout.open(QIODevice::WriteOnly | QIODevice::Text);
 		QTextStream writeStream(&fout);
 		writeStream << db;
 		fout.close();
+		*/
 		qDebug() << "DB log&pass was updated";
 	}
 
@@ -128,12 +156,14 @@ void server::slotReadClient()
 
 	if (func == "changeDB")
 	{
+		/*
 		QString db = QString::fromStdString(mess);
 		QFile fout("database.txt");
 		fout.open(QIODevice::WriteOnly | QIODevice::Text);
 		QTextStream writeStream(&fout);
 		writeStream << db;
 		fout.close();
+		*/
 		qDebug() << "DB database was updated";
 	}
 	/*QString qstr = socket->readAll();

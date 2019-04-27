@@ -35,7 +35,10 @@ bool LPbase::download(std::string & s)
 	db.setDatabaseName("Test");
 
 	if (!db.open())
+	{
 		qDebug() << db.lastError().text();
+		return false;
+	}
 	else
 		qDebug() << "LP base opened";
 
@@ -46,8 +49,12 @@ bool LPbase::download(std::string & s)
 
 	while (query.next())
 	{
-		 sendmes+=query.value(0).toString + "\t" << query.value(1) << "\t" << query.value(2);
+		 sendmes+=query.value(0).toString() + "\t" + query.value(1).toString() + "\t" + query.value(2).toString() + "\n";
 	}
+
+	s = sendmes.toStdString();
+	
+	return true;
 	/*
 	QFile fin("log&pass.txt");
 	fin.open(QIODevice::ReadOnly | QIODevice::Text);

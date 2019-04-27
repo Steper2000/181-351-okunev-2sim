@@ -147,6 +147,9 @@ void change::on_pushButton_change_clicked()
 	lol.lev = c.toStdString();
 	//LPbase lpb;
 	//base.download();
+	slot_send_to_server("changeLP "  + a +' '+  b + ' ' + c)
+	
+	/*
 	if (base.add_data(lol))
 	{
 		//base.write2file();
@@ -160,5 +163,5 @@ void change::on_pushButton_change_clicked()
 		m.setText("User don't add! Wrong level");
 		m.exec();
 	}
-		
+		*/
 }
