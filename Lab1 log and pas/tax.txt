@@ -1,6 +1,9 @@
 TAX
 rich
 genius
+life
+water
+air
 nolog
 w
 salto

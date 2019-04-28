@@ -47,9 +47,9 @@ void add::on_pushButton_del_clicked()//сомнительное, но чётко работающее удалени
 		a = ui.ld2->text();
 		if (a != "") {
 			//db.download();
-			base.del_data(base.find(a.toStdString()));
+			//base.del_data(base.find(a.toStdString()));
 			//db.write2file();
-			slot_send_to_server("changeDB " + base.retrans());
+			slot_send_to_server("deleteDB " + a);
 				QMessageBox m;
 				m.setText("Data deleted from server");
 				m.exec();
@@ -79,11 +79,11 @@ void add::on_pushButton_add_clicked() //добавляет чётко
 	//DataBase db;
 	//db.download();
 	//db.add_data(da);
-	if (base.add_data(da)) 
+	if (checkPred(da.pred) && checkOtr(da.otr) && checkDate(da.date) && checkNal(da.nal) && checkSum(da.sum))
 	{
 		//base.write2file();
 		
-		slot_send_to_server("changeDB "+base.retrans());
+		slot_send_to_server("addDB "+ a + '\t' + b + '\t' + c + '\t' + d + '\t' + e);
 		QMessageBox m;
 		m.setText("Data sent on the server");
 		m.exec();

@@ -121,6 +121,9 @@ void change::on_del_clicked()
 		if (a != "") 
 		{
 			slot_send_to_server("delete " + a);
+			QMessageBox m;
+			m.setText("User deleted on server");
+			m.exec();
 		}
 		else {
 			QMessageBox m;
@@ -158,11 +161,11 @@ void change::on_pushButton_change_clicked()
 {
 	lopal lol;
 	QString a = ui.line_Nlogin->text();
-	lol.log = a.toStdString();
+	//lol.log = a.toStdString();
 	QString b = ui.line_Npassword->text();
-	lol.pas = b.toStdString();
+	//lol.pas = b.toStdString();
 	QString c = ui.line_level->text();
-	lol.lev = c.toStdString();
+	//lol.lev = c.toStdString();
 	//LPbase lpb;
 	//base.download();
 	if (c=="a"||c=="m"||c=="u")

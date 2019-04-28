@@ -227,8 +227,8 @@ void Lab1logandpas::on_pushButton_autorise_clicked()
 
 void Lab1logandpas::on_Ftest_clicked()
 {	
-
-	autorize("a", "a");
+	//kek();
+	//autorize("a", "a");
 	/*
 	lopal lol;
 	//QString a = ui.line_Nlogin->text();

@@ -144,6 +144,7 @@ void server::slotReadClient()
 		fout.close();
 		*/
 		qDebug() << "DB log&pass was updated";
+		db.close();
 	}
 
 	if (func == "delete")
@@ -182,8 +183,50 @@ void server::slotReadClient()
 		slotSendToCLient(QString::fromStdString(a));
 	}
 
-	if (func == "changeDB")
+	if (func == "addDB")
 	{
+		pos = mess.find("\t");
+		QString a = QString::fromStdString(mess.substr(0, pos));
+		mess.erase(0, pos + 1);
+
+		pos = mess.find("\t");
+		QString b = QString::fromStdString(mess.substr(0, pos));
+		mess.erase(0, pos + 1);
+
+		pos = mess.find("\t");
+		QString c = QString::fromStdString(mess.substr(0, pos));
+		mess.erase(0, pos + 1);
+
+		pos = mess.find("\t");
+		QString d = QString::fromStdString(mess.substr(0, pos));
+		mess.erase(0, pos + 1);
+
+		QString e = QString::fromStdString(mess);
+		
+		QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+		db.setDatabaseName("C:/181-351-okunev/181-351-Okunev-2sim/Qtserver/Test");
+
+		if (!db.open())
+			qDebug() << db.lastError().text();
+		else
+			qDebug() << "LP base opened";
+		
+
+		QSqlQuery query(db);
+
+		query.prepare("INSERT INTO nologi(company, industry, date, tax, sum) VALUES(:company, :industry, :date, :tax, :sum)");
+		query.bindValue(":company", a);
+		query.bindValue(":industry", b);
+		query.bindValue(":date",c);
+		query.bindValue(":tax", d);
+		query.bindValue(":sum", e);
+		query.exec();//выполнить
+
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
 		/*
 		QString db = QString::fromStdString(mess);
 		QFile fout("database.txt");
@@ -193,7 +236,36 @@ void server::slotReadClient()
 		fout.close();
 		*/
 		qDebug() << "DB database was updated";
+		db.close();
 	}
+	
+	if (func == "deleteDB")
+	{
+
+		QString log = QString::fromStdString(mess);
+
+		QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+		db.setDatabaseName("Test");
+
+		if (!db.open())
+			qDebug() << db.lastError().text();
+		else
+			qDebug() << "LP base opened";
+
+		QSqlQuery query(db);
+		query.prepare("DELETE FROM nologi WHERE company = :login");
+		query.bindValue(":login", log);
+		
+		query.exec();//выполнить
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
+
+		qDebug() << "DATA deleted";
+	}
+	
 	/*QString qstr = socket->readAll();
 	std::string str = qstr.toStdString();
 	if (str == "autorize\r\n")

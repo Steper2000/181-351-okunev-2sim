@@ -6,6 +6,7 @@
 //#include < QIODevice>
 
 QString autorize(QString login, QString pass);
+void kek();
 
 struct datas {
 	std::string pred;

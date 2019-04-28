@@ -188,23 +188,23 @@ void showDB::on_delsor_clicked()
 	//DataBase eshkere;
 	//eshkere.download();
 
-	for (int i = 1; i < eshkere.db.size(); i++)
+	for (int i = 0; i < eshkere.db.size(); i++)
 	{
 		//for(int j=0; j<5; j++){}
 		item = new QStandardItem(QString::fromStdString(eshkere.db[i].pred));
-		model->setItem(i - 1, 0, item);
+		model->setItem(i , 0, item);
 
 		item = new QStandardItem(QString::fromStdString(eshkere.db[i].otr));
-		model->setItem(i - 1, 1, item);
+		model->setItem(i , 1, item);
 
 		item = new QStandardItem(QString::fromStdString(eshkere.db[i].date));
-		model->setItem(i - 1, 2, item);
+		model->setItem(i , 2, item);
 
 		item = new QStandardItem(QString::fromStdString(eshkere.db[i].nal));
-		model->setItem(i - 1, 3, item);
+		model->setItem(i , 3, item);
 
 		item = new QStandardItem(QString::fromStdString(eshkere.db[i].sum));
-		model->setItem(i - 1, 4, item);
+		model->setItem(i , 4, item);
 	}
 
 	ui.tableView->setModel(model);

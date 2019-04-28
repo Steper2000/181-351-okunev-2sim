@@ -4,5 +4,6 @@ flex
 rock
 bank
 sale
+steal
 bi
 .

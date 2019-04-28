@@ -25,6 +25,31 @@ bool DataBase::add_data(datas tempData)//чётко
 
 bool DataBase::download(std::string & res) //работает чётко
 {
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+	db.setDatabaseName("Test");
+
+	if (!db.open())
+	{
+		qDebug() << db.lastError().text();
+		return false;
+	}
+	else
+		qDebug() << "LP base opened";
+
+	QSqlQuery query(db);
+	query.exec("SELECT * FROM 'nologi' ");
+
+	QString sendmes;
+
+	while (query.next())
+	{
+		sendmes += query.value(0).toString() + "\t" + query.value(1).toString() + "\t" + query.value(2).toString()  + "\t" + query.value(3).toString() + "\t" + query.value(4).toString()+ "\n";
+	}
+
+	res = sendmes.toStdString();
+
+	return true;
+	/*
 	QFile fin("database.txt");
 	fin.open(QIODevice::ReadOnly | QIODevice::Text);
 	if (!fin.isOpen()) 
@@ -32,6 +57,7 @@ bool DataBase::download(std::string & res) //работает чётко
 	res = fin.readAll();
 	fin.close();
 	return true;
+	*/
 }
 
 void DataBase::transformStr2BD(std::string sdb)// чётко
@@ -152,8 +178,6 @@ bool DataBase::write2file()//блестяще
 	return true;
 }
 
-
-
 QString autorize(QString login, QString password)
 {
 
@@ -226,26 +250,20 @@ QString autorize(QString login, QString password)
 	//QSqlRecord rec = query.record();
 	//const int accessIndex = rec.indexOf("access");
 	
-	
-		QString a;
-
+	QString a;	
 		
-		
-		if (query.next())
-		{
-			a = query.value(0).toString();
-			db.close();
+	if (query.next())
+	{
+		a = query.value(0).toString();
+		db.close();
 			
-			if (a == 'a')
-				return "admin";
-			if (a == 'm')
-				return "manager";
-			if (a == 'u')
-				return "user";
-			
-			
-			//return a;
-		}
+	if (a == 'a')
+		return "admin";
+	if (a == 'm')
+		return "manager";
+	if (a == 'u')
+		return "user";
+	}
 	
 	db.close();
 	return "error";
@@ -496,4 +514,145 @@ QString DataBase::retrans()
 	}
 	QString str = str.fromStdString(sdb);
 	return str;
+}
+
+
+void kek()
+{
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+	db.setDatabaseName("C:/181-351-okunev/181-351-Okunev-2sim/Qtserver/Test");
+
+	if (!db.open())
+		qDebug() << db.lastError().text();
+	else
+		qDebug() << "LP base opened";
+	//qDebug() << db.tables();
+
+	QSqlQuery query(db);	
+		
+		query.prepare("INSERT INTO nologi(company, industry, date, tax, sum) VALUES(:company, :industry, :date, :tax, :sum)");
+		query.bindValue(":company", "Knigga");
+		query.bindValue(":industry", "rap");
+		query.bindValue(":date", "11.11.1111");
+		query.bindValue(":tax", "water");
+		query.bindValue(":sum", "1000");
+		query.exec();//выполнить
+
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
+	
+		query.prepare("INSERT INTO nologi(company, industry, date, tax, sum) VALUES(:company, :industry, :date, :tax, :sum)");
+		query.bindValue(":company", "Knigga");
+		query.bindValue(":industry", "flex");
+		query.bindValue(":date", "11.11.1111");
+		query.bindValue(":tax", "water");
+		query.bindValue(":sum", "1000");
+		query.exec();//выполнить
+
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
+
+		query.prepare("INSERT INTO nologi(company, industry, date, tax, sum) VALUES(:company, :industry, :date, :tax, :sum)");
+		query.bindValue(":company", "Knigga");
+		query.bindValue(":industry", "rap");
+		query.bindValue(":date", "13.11.1111");
+		query.bindValue(":tax", "life");
+		query.bindValue(":sum", "1000");
+		query.exec();//выполнить
+
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
+
+		query.prepare("INSERT INTO nologi(company, industry, date, tax, sum) VALUES(:company, :industry, :date, :tax, :sum)");
+		query.bindValue(":company", "Knigga");
+		query.bindValue(":industry", "rock");
+		query.bindValue(":date", "11.11.1111");
+		query.bindValue(":tax", "life");
+		query.bindValue(":sum", "1000");
+		query.exec();//выполнить
+
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
+
+		query.prepare("INSERT INTO nologi(company, industry, date, tax, sum) VALUES(:company, :industry, :date, :tax, :sum)");
+		query.bindValue(":company", "Knigga");
+		query.bindValue(":industry", "rap");
+		query.bindValue(":date", "11.11.1111");
+		query.bindValue(":tax", "life");
+		query.bindValue(":sum", "1002");
+		query.exec();//выполнить
+
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
+
+		query.prepare("INSERT INTO nologi(company, industry, date, tax, sum) VALUES(:company, :industry, :date, :tax, :sum)");
+		query.bindValue(":company", "Knigga");
+		query.bindValue(":industry", "rap");
+		query.bindValue(":date", "11.11.1111");
+		query.bindValue(":tax", "life");
+		query.bindValue(":sum", "1000");
+		query.exec();//выполнить
+
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
+
+		query.prepare("INSERT INTO nologi(company, industry, date, tax, sum) VALUES(:company, :industry, :date, :tax, :sum)");
+		query.bindValue(":company", "GUNE");
+		query.bindValue(":industry", "rap");
+		query.bindValue(":date", "23.06.2003");
+		query.bindValue(":tax", "w");
+		query.bindValue(":sum", "1000");
+		query.exec();//выполнить
+
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
+
+		query.prepare("INSERT INTO nologi(company, industry, date, tax, sum) VALUES(:company, :industry, :date, :tax, :sum)");
+		query.bindValue(":company", "Gas prom");
+		query.bindValue(":industry", "steal");
+		query.bindValue(":date", "9.03.2001");
+		query.bindValue(":tax", "rich");
+		query.bindValue(":sum", "500");
+		query.exec();//выполнить
+
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
+
+		query.prepare("INSERT INTO nologi(company, industry, date, tax, sum) VALUES(:company, :industry, :date, :tax, :sum)");
+		query.bindValue(":company", "SDK");
+		query.bindValue(":industry", "flex");
+		query.bindValue(":date", "26.04.2019");
+		query.bindValue(":tax", "nolog");
+		query.bindValue(":sum", "1488");
+		query.exec();//выполнить
+
+		if (!query.isActive())
+		{
+			//ошибка
+			qDebug() << query.lastError().text();
+		}
 }
