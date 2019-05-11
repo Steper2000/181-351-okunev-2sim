@@ -38,10 +38,10 @@
     <ClCompile Include="..\Lab1 log and pas\LPbase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Lab1 log and pas\crypto.cpp">
+    <ClCompile Include="crypto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Lab1 log and pas\TinyAES.cpp">
+    <ClCompile Include="TinyAES.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,10 +57,10 @@
     <ClInclude Include="..\Lab1 log and pas\LPbase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Lab1 log and pas\crypto.h">
+    <ClInclude Include="crypto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Lab1 log and pas\TinyAES.h">
+    <ClInclude Include="TinyAES.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

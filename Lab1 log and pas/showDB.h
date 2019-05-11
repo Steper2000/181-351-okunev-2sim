@@ -6,7 +6,7 @@
 #include "classdb.h"
 #include <QMessageBox>
 #include <QTcpSocket>
-
+#include "crypto.h"
 class showDB : public QDialog, public Ui::showDB//, public classdb
 {
 	Q_OBJECT
@@ -30,14 +30,17 @@ private slots:
 
 	void slot_ready_read()
 	{
-		QByteArray arr;
+		QByteArray arr, arr2;
 		std::string mess;
 
 		while (saske->bytesAvailable() > 0)
 		{
 			arr = saske->readAll();
-			mess = arr.toStdString();
 		}
+
+		crypto c;
+		arr2 = c.decrypt(arr);
+		mess = arr2.toStdString();
 
 		eshkere.transformStr2BD(mess);
 
@@ -91,9 +94,11 @@ private slots:
 
 	void slot_send_to_server(QString mess)
 	{
-		QByteArray arr;
+		QByteArray arr, arr2;
 		arr.append(mess);
-		saske->write(arr);
+		crypto c;
+		arr2 = c.encrypt(arr);
+		saske->write(arr2);
 	}
 
 	void slot_disconected()

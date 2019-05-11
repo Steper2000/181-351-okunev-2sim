@@ -99,8 +99,10 @@
   <ItemGroup>
     <ClCompile Include="..\Lab1 log and pas\classdb.cpp" />
     <ClCompile Include="..\Lab1 log and pas\LPbase.cpp" />
+    <ClCompile Include="crypto.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server.cpp" />
+    <ClCompile Include="TinyAES.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="server.h" />
@@ -108,6 +110,8 @@
   <ItemGroup>
     <ClInclude Include="..\Lab1 log and pas\classdb.h" />
     <ClInclude Include="..\Lab1 log and pas\LPbase.h" />
+    <ClInclude Include="crypto.h" />
+    <ClInclude Include="TinyAES.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -1,7 +1,7 @@
 #pragma once
 #include "classdb.h"
 #include "LPbase.h"
-//#include "crypto.h"
+#include "crypto.h"
 
 #include <QObject>
 #include <QTcpServer>

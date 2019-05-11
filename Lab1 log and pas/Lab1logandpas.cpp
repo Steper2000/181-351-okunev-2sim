@@ -35,14 +35,18 @@ void Lab1logandpas::slot_connected()
 
 void Lab1logandpas::slot_ready_read()
 {
-	QByteArray arr;
+	QByteArray arr, arr2;
 	std::string mess;
 	
 	while (saske->bytesAvailable() > 0)
 	{
 		arr = saske->readAll();
-		mess = arr.toStdString();
 	}
+
+	crypto c;
+	arr2 = c.decrypt(arr);
+	mess = arr2.toStdString();
+
 	/*QMessageBox m;
 	m.setText(QString::fromStdString(mess));
 	m.exec();*/
@@ -93,9 +97,11 @@ void Lab1logandpas::slot_ready_read()
 
 void Lab1logandpas::slot_send_to_server(QString mess)
 {
-	QByteArray arr;
+	QByteArray arr, arr2;
 	arr.append(mess);
-	saske->write(arr);
+	crypto c;
+	arr2 = c.encrypt(arr);
+	saske->write(arr2);
 }
 
 void Lab1logandpas::slot_disconected()

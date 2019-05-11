@@ -16,7 +16,7 @@ change::change(QWidget *parent)
 	saske->connectToHost("127.0.0.1", 33333);
 	connect(saske, SIGNAL(connected()), SLOT(slot_connected()));
 	connect(saske, SIGNAL(readyRead()), SLOT(slot_ready_read()));
-	slot_send_to_server("LPtable");
+	//slot_send_to_server("LPtable");
 }
 change::~change()
 {

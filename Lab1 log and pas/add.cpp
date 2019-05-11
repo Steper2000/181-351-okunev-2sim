@@ -10,7 +10,7 @@ add::add(QWidget *parent)
 	saske->connectToHost("127.0.0.1", 33333);
 	connect(saske, SIGNAL(connected()), SLOT(slot_connected()));
 	connect(saske, SIGNAL(readyRead()), SLOT(slot_ready_read()));
-	slot_send_to_server("Nolog");
+	//slot_send_to_server("Nolog");
 }
 
 add::~add()
@@ -34,9 +34,9 @@ void add::on_pushButton_del_clicked()//сомнительное, но чётко работающее удалени
 		{
 			int id = a.toInt();
 			//db.download();
-			base.del_data(id);
+		//	base.del_data(id);
 			//db.write2file();
-			slot_send_to_server("changeDB " + base.retrans());
+		//	slot_send_to_server("changeDB " + base.retrans());
 			QMessageBox m;
 			m.setText("Data deleted from server");
 			m.exec();

@@ -73,10 +73,16 @@ void server::slotReadClient()
 	//os.setAutoDetectUnicode(true);
 	//os << "\hello! you conected ";
 	//if (socket->bytesAvaible()>0)
-	QByteArray arr = socket->readAll();
+	
+	QByteArray arr, arr2;
+	arr = socket->readAll();
+	crypto c;
+	arr2 = c.decrypt(arr);
+
+	
 	
 	std::string mess;
-	mess = arr.toStdString();
+	mess = arr2.toStdString();
 	qDebug()<<QString::fromStdString(mess);
 	
 	int pos = mess.find(" ");
@@ -281,9 +287,13 @@ void server::slotSendToCLient(QString mess)
 {
 	QObject * object = QObject::sender();
 	QTcpSocket * socket = static_cast<QTcpSocket *>(object);
-	QByteArray arr;
+	QByteArray arr, arr2;
 	arr.append(mess);
-	socket->write(arr);
+	
+	crypto c;
+	arr2 = c.encrypt(arr);
+	
+	socket->write(arr2);
 }
 
 

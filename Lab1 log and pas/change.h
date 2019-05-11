@@ -4,7 +4,7 @@
 #include "ui_change.h"
 #include "LPbase.h"
 #include <QTcpSocket>
-//#include "classdb.h"
+#include "crypto.h"
 
 class change : public QDialog, public Ui::change //public DataBase
 {
@@ -17,7 +17,7 @@ public:
 private:
 	Ui::change ui;
 	QTcpSocket * saske;
-	LPbase base;
+	//LPbase base;
 private slots:
 	void on_pushButton_change_clicked();
 	void on_del_clicked();
@@ -28,23 +28,27 @@ private slots:
 
 	void slot_ready_read()
 	{
-		QByteArray arr;
+		QByteArray arr, arr2;
 		std::string mess;
 
 		while (saske->bytesAvailable() > 0)
 		{
 			arr = saske->readAll();
-			mess = arr.toStdString();
 		}
 		
-		base.trans(mess);
+		crypto c;
+		arr2 = c.decrypt(arr);
+		mess = arr2.toStdString();
+	//	base.trans(mess);
 	}
 
 	void slot_send_to_server(QString mess)
 	{
-		QByteArray arr;
+		QByteArray arr, arr2;
 		arr.append(mess);
-		saske->write(arr);
+		crypto c;
+		arr2 = c.encrypt(arr);
+		saske->write(arr2);
 	}
 
 	void slot_disconected()
