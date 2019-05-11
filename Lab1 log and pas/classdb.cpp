@@ -9,6 +9,7 @@
 #include <QSqlRecord>
 #include <QVariant>
 #include <QDebug>
+
 bool DataBase::add_data(datas tempData)//чётко
 {
 	//download(sdb);

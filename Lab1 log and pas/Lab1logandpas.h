@@ -3,6 +3,9 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_Lab1logandpas.h"
 #include <QTcpSocket>
+
+#include "crypto.h"
+
 class Lab1logandpas : public QMainWindow
 {
 	Q_OBJECT

@@ -8,6 +8,10 @@
 #include "admenu.h"
 #include "LPbase.h"
 
+
+
+
+
 //#include <fstream>
 
 Lab1logandpas::Lab1logandpas(QWidget *parent)
@@ -227,6 +231,12 @@ void Lab1logandpas::on_pushButton_autorise_clicked()
 
 void Lab1logandpas::on_Ftest_clicked()
 {	
+	
+	
+	//QByteArray arr ="kill me pls" ;
+	//crypto d;
+	//slot_send_to_server(d.encrypt(arr));
+
 	//kek();
 	//autorize("a", "a");
 	/*
